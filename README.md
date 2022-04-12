@@ -8,6 +8,7 @@
 4. Core Service: It contains models: `Student`, `Teacher`, `Classroom`. A student / teacher is only in one classroom. A classroom has many students, one teacher.
 5. Report Service: Make reports about Classroom
 6. Logger Service: log result from `Report Service` and requester. Using kafka to handle event
+7. UI Service: display data. Using ReactJs.
 ```
 
 ### Setup
