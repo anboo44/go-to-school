@@ -1,0 +1,9 @@
+plugins {
+    id 'org.springframework.boot'
+}
+
+archivesBaseName = 'auth-service'
+
+dependencies {
+
+}
