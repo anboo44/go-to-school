@@ -2,15 +2,13 @@ package com.uet.gts.core.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.uet.gts.core.model.base.EnumPattern;
+import com.uet.gts.core.common.validation.annotation.EnumPattern;
 import com.uet.gts.core.model.entity.Student;
 import com.uet.gts.core.model.vo.Gender;
 import com.uet.gts.core.model.vo.GroupType;
 import lombok.*;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Past;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Getter
@@ -46,21 +44,24 @@ public class StudentDTO {
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     private Integer id;
 
-//    @Max(value = 255, message = "Max length of name is 255")
-//    @NotEmpty(message = "name is required")
+    @Size(max = 255, message = "Max length of name is 255")
+    @NotEmpty(message = "name cannot be empty")
+    @NotNull(message = "name is required")
     private String name;
 
     @EnumPattern(regexp = "male$|female$", message = "gender is must be male or female")
     private String gender;
 
     @JsonFormat(pattern="yyyy/MM/dd")
-//    @Past(message = "dateOfBirth must be past")
+    @Past(message = "dateOfBirth must be past")
+    @NotNull(message = "dateOfBirth is required")
     private Date dateOfBirth;
 
-//    @Max(value = 255, message = "Max length of parentName is 255")
-//    @NotEmpty(message = "parentName is required")
+    @Size(max = 255, message = "Max length of parentName is 255")
+    @NotEmpty(message = "parentName cannot be empty")
+    @NotNull(message = "parentName is required")
     private String parentName;
 
-//    @EnumPattern(regexp = "normal$|special$", message = "groupType is must be normal or special")
+    @EnumPattern(regexp = "normal$|special$", message = "groupType is must be normal or special")
     private String groupType;
 }

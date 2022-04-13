@@ -43,7 +43,7 @@ public class Student extends DateAudit implements Serializable {
     @Past
     private Date dateOfBirth;
 
-    @Column(name = "conservator", nullable = false)
+    @Column(name = "parent_name", nullable = false)
     @Length(max = 255)
     private String parentName;
 

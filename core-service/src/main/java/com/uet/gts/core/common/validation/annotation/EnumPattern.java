@@ -1,4 +1,6 @@
-package com.uet.gts.core.model.base;
+package com.uet.gts.core.common.validation.annotation;
+
+import com.uet.gts.core.common.validation.constraint.EnumPatternValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

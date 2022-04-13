@@ -5,4 +5,5 @@ public class ErrorList {
     public static final String INVALID_OFFSET = "Offset is invalid";
 
     public static final String INVALID_PARAMETER = "Request's parameter is invalid";
+    public static final String UNKNOWN_ERROR = "Unknown error happened. Please try again later";
 }
