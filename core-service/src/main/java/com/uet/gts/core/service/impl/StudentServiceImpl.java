@@ -48,6 +48,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public void create(Student student) {
+        studentRepository.save(student);
+    }
+
+    @Override
     public List<Student> getByMultiParams(String name, String orderBy, Integer limit, Integer offset) {
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<Student> criteriaQuery  = builder.createQuery(Student.class);

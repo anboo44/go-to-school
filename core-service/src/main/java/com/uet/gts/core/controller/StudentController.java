@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(path = "/api/v1/students", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/api/v1/students",
+        produces = MediaType.APPLICATION_JSON_VALUE,
+        consumes = MediaType.APPLICATION_JSON_VALUE)
 public class StudentController {
 
     @Autowired
@@ -38,7 +40,7 @@ public class StudentController {
     @PostMapping("")
     public ResponseDTO create(@RequestBody @Valid StudentDTO dto) {
         return new ResponseDTO(
-                null
+                studentUseCase.create(dto)
         );
     }
 }

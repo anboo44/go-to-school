@@ -25,8 +25,7 @@ public class Student extends DateAudit implements Serializable {
 
     //==============[ Field Definition ]=============================
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
@@ -50,4 +49,8 @@ public class Student extends DateAudit implements Serializable {
     @Column(name = "group_type", length = 10, nullable = false)
     @Convert(converter = GroupTypeConverter.class)
     private GroupType groupType;
+
+    @ManyToOne
+    @JoinColumn(name = "classroom_id")
+    private Classroom classroom;
 }

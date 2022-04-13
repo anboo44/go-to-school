@@ -31,7 +31,7 @@ public class StudentUseCaseImpl implements StudentUseCase {
         var isExisted = studentService.isExistedById(sid);
         if (isExisted) {
             studentService.deleteById(sid);
-            return new MessageDTO(DELETE_STUDENT_SUCCESS);
+            return new MessageDTO(SUCCESS);
         } else {
             throw new EntityNotFoundException(STUDENT_NOT_FOUND);
         }
@@ -59,7 +59,8 @@ public class StudentUseCaseImpl implements StudentUseCase {
 
     @Override
     public MessageDTO create(StudentDTO dto) {
-        return null;
+        studentService.create(dto.toEntity(false));
+        return new MessageDTO(SUCCESS);
     }
 
     private MetaDTO buildMeta(int totalElements, int size, Integer limit, Integer offset) {

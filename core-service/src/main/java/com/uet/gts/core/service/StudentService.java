@@ -15,5 +15,7 @@ public interface StudentService {
 
     Integer countWithName(String name);
 
+    void create(Student student);
+
     List<Student> getByMultiParams(String name, String orderBy, Integer limit, Integer offset);
 }
