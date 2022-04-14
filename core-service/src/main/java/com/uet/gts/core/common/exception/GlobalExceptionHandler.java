@@ -66,7 +66,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public @ResponseBody ResponseDTO handleUnknownError(Exception e) {
-        log.error(String.format("Happen error: %s", e.getMessage()));
+        e.printStackTrace();
         return new ResponseDTO(
                 new ErrorDTO(UNKNOWN_ERROR)
         );

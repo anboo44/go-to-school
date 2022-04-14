@@ -14,4 +14,5 @@ dependencies {
     implementation 'com.zaxxer:HikariCP:5.0.1'
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.7'
     implementation 'mysql:mysql-connector-java:8.0.28'
+    implementation 'org.postgresql:postgresql:42.3.3'
 }

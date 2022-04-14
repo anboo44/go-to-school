@@ -1,9 +1,15 @@
 package com.uet.gts.core.service.impl;
 
+import com.uet.gts.core.common.util.SortUtil;
 import com.uet.gts.core.model.entity.Student;
 import com.uet.gts.core.repository.StudentRepository;
+import com.uet.gts.core.repository.spec.StudentSpecification;
 import com.uet.gts.core.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -26,6 +32,9 @@ public class StudentServiceImpl implements StudentService {
 
     @PersistenceContext
     private EntityManager em;
+
+    @Autowired
+    private SortUtil sortUtil;
 
     @Override
     public Optional<Student> getById(Integer sid) {
@@ -93,5 +102,13 @@ public class StudentServiceImpl implements StudentService {
         if (offset != null) typedQuery.setFirstResult((offset - 1) * limit);
 
         return typedQuery.getResultList();
+    }
+
+    public Page<Student> getByMultiParamsV2(String name, String orderBy, Integer limit, Integer offset) {
+        Sort sort = sortUtil.buildSortStatement(new Student(), orderBy);
+        var pageRequest = PageRequest.of(offset, limit, sort);
+
+        var spec = Specification.where(StudentSpecification.canHaveName(name));
+        return studentRepository.findAll(spec, pageRequest);
     }
 }

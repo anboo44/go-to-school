@@ -5,11 +5,14 @@ import com.uet.gts.core.model.dto.StudentDTO;
 import com.uet.gts.core.usecase.StudentUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 
 @RestController
+@Validated
 @RequestMapping(path = "/api/v1/students",
         produces = MediaType.APPLICATION_JSON_VALUE,
         consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -19,7 +22,10 @@ public class StudentController {
     private StudentUseCase studentUseCase;
 
     @GetMapping("")
-    public ResponseDTO list(String name, String orderBy, Integer limit, Integer offset) {
+    public ResponseDTO list(String name,
+                            @Pattern(regexp = "\\D+ASC$|\\D+DES$") String orderBy,
+                            @Min(1) Integer limit,
+                            @Min(1) Integer offset) {
         return studentUseCase.getByMultiParams(name, orderBy, limit, offset);
     }
 

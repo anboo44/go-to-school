@@ -39,18 +39,17 @@ public class StudentUseCaseImpl implements StudentUseCase {
 
     @Override
     public ResponseDTO getByMultiParams(String name, String orderBy, Integer limit, Integer offset) {
-        /* Validate params */
-        var isValidLimit = limit == null || limit > 0;
-        var isValidOffset = offset == null || offset > 0;
-        var isValidParams = isValidLimit && isValidOffset;
-        if (!isValidParams) throw new IllegalArgumentException(INVALID_PARAMETER);
+        if (limit == null) limit = Integer.MAX_VALUE;
+        if (offset == null) offset = 1;
 
         /* Handle and build response */
-        Integer totalStudents = studentService.countWithName(name);
-        var data = studentService.getByMultiParams(name, orderBy, limit, offset)
-                .stream().map(StudentDTO::new).collect(Collectors.toList());
+//        Integer totalStudents = studentService.countWithName(name);
+//        var data = studentService.getByMultiParams(name, orderBy, limit, offset)
+//                .stream().map(StudentDTO::new).collect(Collectors.toList());
+        var pageData = studentService.getByMultiParamsV2(name, orderBy, limit, offset - 1);
+        var data = pageData.getContent().stream().map(StudentDTO::new).collect(Collectors.toList());
 
-        var meta = buildMeta(totalStudents, data.size(), limit, offset);
+        var meta = buildMeta(pageData.getTotalElements(), data.size(), limit, offset);
         return ResponseDTO.builder()
                 .data(data)
                 .meta(meta)
@@ -63,8 +62,8 @@ public class StudentUseCaseImpl implements StudentUseCase {
         return new MessageDTO(SUCCESS);
     }
 
-    private MetaDTO buildMeta(int totalElements, int size, Integer limit, Integer offset) {
-        float pageDiv = limit != null && limit < totalElements ? (totalElements / limit) : 1f;
+    private MetaDTO buildMeta(long totalElements, int size, Integer limit, Integer offset) {
+        float pageDiv = limit != null && limit < totalElements ? (float)totalElements / limit : 1f;
         int totalPages = pageDiv == (int)pageDiv ? (int)pageDiv : (int)(pageDiv + 1);
 
         int pageNumber = offset == null ? 1 : offset;
@@ -75,7 +74,7 @@ public class StudentUseCaseImpl implements StudentUseCase {
 
         var pagination = PaginationDTO.builder()
                 .totalPages(totalPages)
-                .totalElements(totalElements)
+                .totalElements((int)totalElements)
                 .size(size)
                 .pageNumber(pageNumber)
                 .first(isFirstPage)
