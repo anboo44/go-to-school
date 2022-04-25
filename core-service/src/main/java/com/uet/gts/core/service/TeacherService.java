@@ -11,4 +11,6 @@ public interface TeacherService {
     Optional<Teacher> findById(Integer id);
 
     void deleteById(Integer id);
+
+    void create(Teacher teacher);
 }

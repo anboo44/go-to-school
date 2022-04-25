@@ -1,11 +1,13 @@
 package com.uet.gts.core.common.exception;
 
+import com.uet.gts.core.common.exception.ex.ExistedEntityException;
 import com.uet.gts.core.model.dto.ErrorDTO;
 import com.uet.gts.core.model.dto.ResponseDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,9 +30,9 @@ public class GlobalExceptionHandler {
         );
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
+    @ExceptionHandler({ IllegalArgumentException.class, ExistedEntityException.class })
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public @ResponseBody ResponseDTO handleBadRequest(IllegalArgumentException e) {
+    public @ResponseBody ResponseDTO handleBadRequest(Exception e) {
         return new ResponseDTO(
                 new ErrorDTO(e.getMessage())
         );
@@ -61,6 +63,14 @@ public class GlobalExceptionHandler {
         }
 
         return null;
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public @ResponseBody ResponseDTO handleMethodNotSupported(HttpRequestMethodNotSupportedException e) {
+        return new ResponseDTO(
+                new ErrorDTO(e.getMessage())
+        );
     }
 
     @ExceptionHandler(Exception.class)

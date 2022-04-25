@@ -43,9 +43,6 @@ public class StudentUseCaseImpl implements StudentUseCase {
         if (offset == null) offset = 1;
 
         /* Handle and build response */
-//        Integer totalStudents = studentService.countWithName(name);
-//        var data = studentService.getByMultiParams(name, orderBy, limit, offset)
-//                .stream().map(StudentDTO::new).collect(Collectors.toList());
         var pageData = studentService.getByMultiParamsV2(name, orderBy, limit, offset - 1);
         var data = pageData.getContent().stream().map(StudentDTO::new).collect(Collectors.toList());
 

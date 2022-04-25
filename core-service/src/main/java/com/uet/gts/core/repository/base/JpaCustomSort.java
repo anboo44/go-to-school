@@ -1,4 +1,4 @@
-package com.uet.gts.core.common.util;
+package com.uet.gts.core.repository.base;
 
 import com.uet.gts.core.model.mapper.FieldNameMapper;
 import org.springframework.data.domain.Sort;
@@ -10,13 +10,13 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Component
-public class SortUtil {
+public class JpaCustomSort {
 
     private final Pattern ASC_PATTERN = Pattern.compile("(\\w+)ASC$");
     private final Pattern DESC_PATTERN = Pattern.compile("(\\w+)DES$");
     private final Integer FIRST_REGEX_GROUP = 1;
 
-    public <T>Sort buildSortStatement(T obj, String param) {
+    public <T> Sort buildSortStatement(T obj, String param) {
         if (param == null) return Sort.unsorted();
 
         var ascMatcher = ASC_PATTERN.matcher(param);
@@ -40,7 +40,7 @@ public class SortUtil {
         return Sort.unsorted();
     }
 
-    private <T>boolean isValidField(T obj, String fieldName) {
+    private <T> boolean isValidField(T obj, String fieldName) {
         var fieldNames = Arrays.stream(
                 obj.getClass().getDeclaredFields()
         ).map(Field::getName).collect(Collectors.toList());

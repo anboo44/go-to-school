@@ -6,14 +6,15 @@
         http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet author="HungPT" id="1" labels="1.0.0">
+    <changeSet author="HungPT" id="v0" labels="Add Tag V0">
+        <tagDatabase tag="v0"/>
+    </changeSet>
+    <changeSet author="HungPT" id="v1" labels="Add student, teacher, classroom tables">
+        <sqlFile path="/db/migration/1.0.0/postgres/000_DDL_teacher_create_table.sql"/>
         <sqlFile path="/db/migration/1.0.0/postgres/000_DDL_classroom_create_table.sql"/>
         <sqlFile path="/db/migration/1.0.0/postgres/000_DDL_student_create_table.sql"/>
-        <sqlFile path="/db/migration/1.0.0/postgres/000_DDL_teacher_create_table.sql"/>
         <rollback>
-            <dropTable cascadeConstraints="true" catalogName="classroom" schemaName="public" tableName="classroom"/>
-            <dropTable cascadeConstraints="true" catalogName="student" schemaName="public" tableName="student"/>
-            <dropTable cascadeConstraints="true" catalogName="teacher" schemaName="public" tableName="teacher"/>
+            <rollback changeSetId="v0" changeSetAuthor="HungPT"/>
         </rollback>
     </changeSet>
 </databaseChangeLog>

@@ -9,8 +9,9 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static com.uet.gts.core.common.constant.ErrorList.STUDENT_NOT_FOUND;
+import static com.uet.gts.core.common.constant.ErrorList.*;
 import static com.uet.gts.core.common.constant.MessageList.SUCCESS;
 
 @Service
@@ -21,7 +22,11 @@ public class TeacherUseCaseImpl implements TeacherUseCase {
 
     @Override
     public List<TeacherDTO> findAll() {
-        return null;
+        return teacherService
+                .findAll()
+                .stream()
+                .map(TeacherDTO::new)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -30,7 +35,7 @@ public class TeacherUseCaseImpl implements TeacherUseCase {
         if (teacherOpt.isPresent()) {
             return new TeacherDTO(teacherOpt.get());
         } else {
-            throw new EntityNotFoundException(STUDENT_NOT_FOUND);
+            throw new EntityNotFoundException(TEACHER_NOT_FOUND);
         }
     }
 
@@ -41,7 +46,13 @@ public class TeacherUseCaseImpl implements TeacherUseCase {
             teacherService.deleteById(id);
             return new MessageDTO(SUCCESS);
         } else {
-            throw new EntityNotFoundException(STUDENT_NOT_FOUND);
+            throw new EntityNotFoundException(TEACHER_NOT_FOUND);
         }
+    }
+
+    @Override
+    public MessageDTO create(TeacherDTO dto) {
+        teacherService.create(dto.toEntity(false));
+        return new MessageDTO(SUCCESS);
     }
 }

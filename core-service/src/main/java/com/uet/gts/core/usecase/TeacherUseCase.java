@@ -11,4 +11,6 @@ public interface TeacherUseCase {
     TeacherDTO getById(Integer id);
 
     MessageDTO deleteById(Integer id);
+
+    MessageDTO create(TeacherDTO dto);
 }

@@ -8,9 +8,8 @@ import org.hibernate.validator.constraints.Range;
 import javax.persistence.*;
 import javax.validation.constraints.Past;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.Year;
-import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 
 @Getter
@@ -44,8 +43,9 @@ public class Teacher extends DateAudit implements Serializable {
 
     //================[ Method Definition ]============================
     public int getExpYear() {
-        ZoneId timeZone = ZoneId.systemDefault();
-        var workStartYear = workStartDate.toInstant().atZone(timeZone).toLocalDate().getYear();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(workStartDate);
+        var workStartYear = calendar.get(Calendar.YEAR);
         var currentYear = Year.now().getValue();
 
         return currentYear - workStartYear;

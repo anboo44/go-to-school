@@ -7,7 +7,8 @@ import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -25,8 +26,8 @@ public class Classroom  extends DateAudit implements Serializable {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "code", nullable = false)
-    @Length(max = 10)
+    @Column(name = "code", nullable = false, unique = true)
+    @Length(max = 5)
     private String code;
 
     @Column(name = "size", nullable = false)
@@ -34,9 +35,9 @@ public class Classroom  extends DateAudit implements Serializable {
     private int size;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "teacher_id", referencedColumnName = "id")
+    @JoinColumn(name = "teacher_id", referencedColumnName = "id", nullable = true)
     private Teacher teacher;
 
     @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Student> students;
+    private Set<Student> students = new HashSet<>();
 }

@@ -49,8 +49,8 @@ public class StudentDTO {
     private Integer id;
 
     @NotNull(message = "name is required")
-    @NotBlank(message = "name cannot be empty")
-    @Size(min = 1, max = 255, message = "name is too long")
+    @Size(max = 255, message = "name is too long")
+    @Size(min = 1, message = "name cannot be empty")
     private String name;
 
     @NotNull(message = "gender is required")
@@ -61,9 +61,9 @@ public class StudentDTO {
     @Pattern(regexp = "^\\d{4}/(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$", message = "dateOfBirth must be yyyy/MM/dd")
     private String dateOfBirth;
 
-    @NotBlank(message = "parentName cannot be empty")
     @NotNull(message = "parentName is required")
-    @Size(min = 1, max = 255, message = "parentName is too long")
+    @Size(max = 255, message = "parentName is too long")
+    @Size(min = 1, message = "parentName cannot be empty")
     private String parentName;
 
     @NotNull(message = "groupType is required")

@@ -1,8 +1,8 @@
 package com.uet.gts.core.service.impl;
 
-import com.uet.gts.core.common.util.SortUtil;
 import com.uet.gts.core.model.entity.Student;
 import com.uet.gts.core.repository.StudentRepository;
+import com.uet.gts.core.repository.base.JpaCustomSort;
 import com.uet.gts.core.repository.spec.StudentSpecification;
 import com.uet.gts.core.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class StudentServiceImpl implements StudentService {
     private EntityManager em;
 
     @Autowired
-    private SortUtil sortUtil;
+    private JpaCustomSort jpaCustomSort;
 
     @Override
     public Optional<Student> getById(Integer sid) {
@@ -105,7 +105,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     public Page<Student> getByMultiParamsV2(String name, String orderBy, Integer limit, Integer offset) {
-        Sort sort = sortUtil.buildSortStatement(new Student(), orderBy);
+        Sort sort = jpaCustomSort.buildSortStatement(new Student(), orderBy);
         var pageRequest = PageRequest.of(offset, limit, sort);
 
         var spec = Specification.where(StudentSpecification.canHaveName(name));

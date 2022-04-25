@@ -50,7 +50,7 @@ public class Student extends DateAudit implements Serializable {
     @Convert(converter = GroupTypeConverter.class)
     private GroupType groupType;
 
-    @ManyToOne
-    @JoinColumn(name = "classroom_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "classroom_id", nullable = true)
     private Classroom classroom;
 }
