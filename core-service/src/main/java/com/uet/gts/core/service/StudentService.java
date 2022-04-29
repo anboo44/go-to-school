@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 
 public interface StudentService {
@@ -21,4 +22,6 @@ public interface StudentService {
     List<Student> getByMultiParams(String name, String orderBy, Integer limit, Integer offset);
 
     Page<Student> getByMultiParamsV2(String name, String orderBy, Integer limit, Integer offset);
+
+    List<Student> findByIds(Set<Integer> ids);
 }

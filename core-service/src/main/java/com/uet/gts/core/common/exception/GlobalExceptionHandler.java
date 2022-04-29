@@ -1,6 +1,8 @@
 package com.uet.gts.core.common.exception;
 
+import com.uet.gts.core.common.exception.ex.BusinessException;
 import com.uet.gts.core.common.exception.ex.ExistedEntityException;
+import com.uet.gts.core.common.exception.ex.NotFoundEntityException;
 import com.uet.gts.core.model.dto.ErrorDTO;
 import com.uet.gts.core.model.dto.ResponseDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +32,7 @@ public class GlobalExceptionHandler {
         );
     }
 
-    @ExceptionHandler({ IllegalArgumentException.class, ExistedEntityException.class })
+    @ExceptionHandler({ IllegalArgumentException.class, ExistedEntityException.class, NotFoundEntityException.class, BusinessException.class })
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public @ResponseBody ResponseDTO handleBadRequest(Exception e) {
         return new ResponseDTO(

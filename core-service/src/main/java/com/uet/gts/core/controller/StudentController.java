@@ -13,9 +13,7 @@ import javax.validation.constraints.Pattern;
 
 @RestController
 @Validated
-@RequestMapping(path = "/api/v1/students",
-        produces = MediaType.APPLICATION_JSON_VALUE,
-        consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/api/v1/students", produces = MediaType.APPLICATION_JSON_VALUE)
 public class StudentController {
 
     @Autowired

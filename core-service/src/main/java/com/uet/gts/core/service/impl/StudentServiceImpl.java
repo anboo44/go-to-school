@@ -21,6 +21,7 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -110,5 +111,10 @@ public class StudentServiceImpl implements StudentService {
 
         var spec = Specification.where(StudentSpecification.canHaveName(name));
         return studentRepository.findAll(spec, pageRequest);
+    }
+
+    @Override
+    public List<Student> findByIds(Set<Integer> ids) {
+        return null;
     }
 }

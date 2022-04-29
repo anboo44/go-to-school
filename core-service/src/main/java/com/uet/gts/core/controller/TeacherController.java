@@ -12,9 +12,7 @@ import javax.validation.Valid;
 
 @RestController
 @Validated
-@RequestMapping(path = "/api/v1/teachers",
-        produces = MediaType.APPLICATION_JSON_VALUE,
-        consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/api/v1/teachers", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TeacherController {
 
     @Autowired
@@ -23,7 +21,7 @@ public class TeacherController {
     @GetMapping("")
     public ResponseDTO list() {
         return new ResponseDTO(
-          teacherUseCase.findAll()
+                teacherUseCase.findAll()
         );
     }
 

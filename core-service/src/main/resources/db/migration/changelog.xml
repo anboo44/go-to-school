@@ -13,6 +13,7 @@
         <sqlFile path="/db/migration/1.0.0/postgres/000_DDL_teacher_create_table.sql"/>
         <sqlFile path="/db/migration/1.0.0/postgres/000_DDL_classroom_create_table.sql"/>
         <sqlFile path="/db/migration/1.0.0/postgres/000_DDL_student_create_table.sql"/>
+        <sqlFile path="/db/migration/1.0.0/postgres/000_DML_seed_data.sql"/>
         <rollback>
             <rollback changeSetId="v0" changeSetAuthor="HungPT"/>
         </rollback>

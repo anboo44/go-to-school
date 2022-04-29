@@ -1,6 +1,9 @@
 package com.uet.gts.core.service.impl;
 
+import com.uet.gts.core.common.exception.ex.BusinessException;
 import com.uet.gts.core.model.entity.Classroom;
+import com.uet.gts.core.model.entity.Student;
+import com.uet.gts.core.model.entity.Teacher;
 import com.uet.gts.core.repository.ClassroomRepository;
 import com.uet.gts.core.service.ClassroomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class ClassroomServiceImpl implements ClassroomService {
@@ -28,5 +33,29 @@ public class ClassroomServiceImpl implements ClassroomService {
     @Override
     public Optional<Classroom> findByCode(String code) {
         return classroomRepository.findByCode(code);
+    }
+
+    @Override
+    public Optional<Classroom> findById(Integer id) {
+        return classroomRepository.findById(id);
+    }
+
+    @Override
+    public void addMembers(Classroom classroom, Teacher teacher, Set<Student> students) {
+        if (classroom.getTeacher() != null)
+            throw new BusinessException("Classroom have another teacher");
+        var inStudentIds = classroom.getStudents().stream().map(Student::getId).collect(Collectors.toSet());
+        var inputStudentIds = students.stream().map(Student::getId).collect(Collectors.toSet());
+        var existedStudentIdList = inputStudentIds.stream()
+                .filter(inStudentIds::contains)
+                .map(Object::toString)
+                .reduce("", (r, n) -> r + "," + n);
+        if (!existedStudentIdList.isEmpty()) {
+            throw new BusinessException("Student joined in classroom with id: [" + existedStudentIdList + "]");
+        }
+
+        classroom.setTeacher(teacher);
+        classroom.setStudents(students);
+        classroomRepository.save(classroom);
     }
 }

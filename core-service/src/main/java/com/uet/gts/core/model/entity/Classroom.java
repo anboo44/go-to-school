@@ -30,12 +30,12 @@ public class Classroom  extends DateAudit implements Serializable {
     @Length(max = 5)
     private String code;
 
-    @Column(name = "size", nullable = false)
+    @Column(name = "classroom_size", nullable = false)
     @Range(min = 0, max = 45)
     private int size;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "teacher_id", referencedColumnName = "id", nullable = true)
+    @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     private Teacher teacher;
 
     @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
