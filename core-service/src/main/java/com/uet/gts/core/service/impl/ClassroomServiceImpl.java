@@ -42,17 +42,19 @@ public class ClassroomServiceImpl implements ClassroomService {
 
     @Override
     public void addMembers(Classroom classroom, Teacher teacher, Set<Student> students) {
-        if (classroom.getTeacher() != null)
+        if (teacher != null && classroom.getTeacher() != null)
             throw new BusinessException("Classroom have another teacher");
-        var inStudentIds = classroom.getStudents().stream().map(Student::getId).collect(Collectors.toSet());
-        var inputStudentIds = students.stream().map(Student::getId).collect(Collectors.toSet());
-        var existedStudentIdList = inputStudentIds.stream()
-                .filter(inStudentIds::contains)
+        else
+            teacher = classroom.getTeacher();
+        var existedClassroomStudentIdList = students.stream()
+                .filter(st -> st.getClassroom() != null)
+                .map(Student::getId)
                 .map(Object::toString)
-                .reduce("", (r, n) -> r + "," + n);
-        if (!existedStudentIdList.isEmpty()) {
-            throw new BusinessException("Student joined in classroom with id: [" + existedStudentIdList + "]");
+                .collect(Collectors.joining(", "));
+        if (!existedClassroomStudentIdList.isEmpty()) {
+            throw new BusinessException("Student joined in classroom with id: [" + existedClassroomStudentIdList + "]");
         }
+        students.forEach(st -> st.setClassroom(classroom));
 
         classroom.setTeacher(teacher);
         classroom.setStudents(students);

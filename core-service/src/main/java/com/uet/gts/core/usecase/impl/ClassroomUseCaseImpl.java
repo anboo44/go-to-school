@@ -57,13 +57,13 @@ public class ClassroomUseCaseImpl implements ClassroomUseCase {
     public MessageDTO addMembers(ClassroomMemberDTO dto, Integer classroomId) {
         var classroomOpt = classroomService.findById(classroomId);
         if (classroomOpt.isEmpty())
-            throw new NotFoundEntityException("Not found classroom with id" + classroomId);
+            throw new NotFoundEntityException("Not found classroom with id: " + classroomId);
 
         var teacherIdOpt = Optional.ofNullable(dto.getTeacherId());
         var teacher = teacherIdOpt.map(id -> {
             var teacherOpt = teacherService.findById(id);
-            if (teacherOpt.isPresent())
-                throw new NotFoundEntityException("Not found teacher with id" + id);
+            if (teacherOpt.isEmpty())
+                throw new NotFoundEntityException("Not found teacher with id: " + id);
             return teacherOpt.get();
         }).orElse(null);
 
@@ -72,7 +72,7 @@ public class ClassroomUseCaseImpl implements ClassroomUseCase {
         var notFoundStudentIdList = dto.getStudentIds().stream()
                 .filter(v -> !jdbcStudentIds.contains(v))
                 .map(Object::toString)
-                .reduce("", (r, n) -> r + "," + n);
+                .collect(Collectors.joining(", "));
         if (!notFoundStudentIdList.isEmpty())
             throw new NotFoundEntityException("Not found student with ids: [" + notFoundStudentIdList + "]");
 

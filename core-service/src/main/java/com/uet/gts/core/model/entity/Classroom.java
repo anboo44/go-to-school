@@ -39,5 +39,6 @@ public class Classroom  extends DateAudit implements Serializable {
     private Teacher teacher;
 
     @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OrderBy("id asc")
     private Set<Student> students = new HashSet<>();
 }

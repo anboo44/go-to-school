@@ -115,6 +115,6 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> findByIds(Set<Integer> ids) {
-        return null;
+        return studentRepository.findByIdIn(ids);
     }
 }

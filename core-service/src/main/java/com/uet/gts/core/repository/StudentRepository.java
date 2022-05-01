@@ -7,6 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Set;
+
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Integer>,
         JpaSpecificationExecutor<Student>,
@@ -20,4 +23,6 @@ public interface StudentRepository extends JpaRepository<Student, Integer>,
 
     @Query("select count(e) from Student e where e.name = ?1")
     Integer countByName(String name); // or countAllByName()
+
+    List<Student> findByIdIn(Set<Integer> ids);
 }
