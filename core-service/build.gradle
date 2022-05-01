@@ -16,4 +16,5 @@ dependencies {
     implementation 'mysql:mysql-connector-java:8.0.28'
     implementation 'org.postgresql:postgresql:42.3.4'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 }
