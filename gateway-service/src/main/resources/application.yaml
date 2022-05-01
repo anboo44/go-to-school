@@ -1,0 +1,23 @@
+server.port: 8080
+
+spring:
+  application.name: gts-gateway-service
+  main:
+    web-application-type: reactive
+    allow-bean-definition-overriding: true
+  cloud:
+    gateway:
+      routes:
+        - id: gts-core-service
+          uri: lb://gts-core-service
+          predicates:
+            - Path=/core/api/**
+
+eureka:
+  instance:
+    instanceId: ${spring.application.name}
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url.defaultZone: http://localhost:8761/eureka
