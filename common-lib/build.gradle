@@ -1,0 +1,10 @@
+plugins {
+    id 'java'
+}
+
+archivesBaseName = 'gts-common-lib'
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.2'
+}
