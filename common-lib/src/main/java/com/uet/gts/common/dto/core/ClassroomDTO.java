@@ -6,6 +6,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
@@ -13,28 +14,9 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClassroomDTO {
+public class ClassroomDTO implements Serializable {
+    private static final long serialVersionUID = 3L;
 
-    //===============[ Constructor ]=============================
-//    public ClassroomDTO(Classroom classroom) {
-//        this.id = classroom.getId();
-//        this.code = classroom.getCode();
-//        this.teacher = classroom.getTeacher() != null ? new TeacherDTO(classroom.getTeacher()): null;
-//        this.students = classroom.getStudents().stream().map(StudentDTO::new).collect(Collectors.toList());
-//        this.maxStudent = classroom.getSize();
-//    }
-
-    //===============[ Converter Method ]=======================
-//    public Classroom toEntity() {
-//        var classroom = new Classroom();
-//
-//        classroom.setCode(code);
-//        classroom.setSize(maxStudent);
-//
-//        return classroom;
-//    }
-
-    //===============[ Field Definition ]========================
     private Integer id;
 
     @NotNull(message = "code is required")

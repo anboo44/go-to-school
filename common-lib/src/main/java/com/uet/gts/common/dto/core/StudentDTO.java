@@ -6,13 +6,15 @@ import lombok.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentDTO {
+public class StudentDTO implements Serializable {
+    private static final long serialVersionUID = 2L;
 
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     private Integer id;

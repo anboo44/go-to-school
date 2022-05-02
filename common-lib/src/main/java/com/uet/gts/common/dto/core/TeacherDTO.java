@@ -2,8 +2,8 @@ package com.uet.gts.common.dto.core;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
-
 import javax.validation.constraints.*;
+import java.io.Serializable;
 
 /**
  * Should separate RequestDTO & ResponseDTO.
@@ -14,7 +14,9 @@ import javax.validation.constraints.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TeacherDTO {
+public class TeacherDTO implements Serializable {
+    private static final long serialVersionUID = 3L;
+
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     private Integer id;
 

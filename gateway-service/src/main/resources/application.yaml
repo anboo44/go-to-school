@@ -12,6 +12,10 @@ spring:
           uri: lb://gts-core-service
           predicates:
             - Path=/core/api/**
+        - id: gts-report-service
+          uri: lb://gts-report-service
+          predicates:
+            - Path=/report/api/**
 
 eureka:
   instance:
