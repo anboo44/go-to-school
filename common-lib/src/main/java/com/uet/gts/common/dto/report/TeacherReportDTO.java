@@ -7,6 +7,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class TeacherReportDTO {
     private Integer teacherTotal;
     private Integer assignedTeacherTotal;

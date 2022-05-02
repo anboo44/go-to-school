@@ -12,4 +12,8 @@ public class TeacherEvent {
     public TeacherReportDTO getData() {
         return dto;
     }
+
+    public String toString() {
+        return "TeacherEvent: " + dto.toString();
+    }
 }

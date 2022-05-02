@@ -13,4 +13,8 @@ public class ClassroomEvent {
     public ClassroomReportDTO getData() {
         return dto;
     }
+
+    public String toString() {
+        return "ClassroomEvent: " + dto.toString();
+    }
 }
