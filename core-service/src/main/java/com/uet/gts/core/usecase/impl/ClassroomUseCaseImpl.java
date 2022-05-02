@@ -1,11 +1,12 @@
 package com.uet.gts.core.usecase.impl;
 
-import com.uet.gts.core.common.exception.ex.ExistedEntityException;
-import com.uet.gts.core.common.exception.ex.NotFoundEntityException;
-import com.uet.gts.core.model.dto.ClassroomDTO;
-import com.uet.gts.core.model.dto.ClassroomMemberDTO;
-import com.uet.gts.core.model.dto.MessageDTO;
+import com.uet.gts.common.dto.MessageDTO;
+import com.uet.gts.common.dto.core.ClassroomDTO;
+import com.uet.gts.common.dto.core.ClassroomMemberDTO;
+import com.uet.gts.common.exception.ExistedEntityException;
+import com.uet.gts.common.exception.NotFoundEntityException;
 import com.uet.gts.core.model.entity.Student;
+import com.uet.gts.core.model.mapper.ClassroomMapper;
 import com.uet.gts.core.service.ClassroomService;
 import com.uet.gts.core.service.StudentService;
 import com.uet.gts.core.service.TeacherService;
@@ -18,8 +19,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.uet.gts.core.common.constant.ErrorList.*;
-import static com.uet.gts.core.common.constant.MessageList.SUCCESS;
+import static com.uet.gts.common.constant.ErrorList.CLASSROOM_CODE_EXISTED;
+import static com.uet.gts.common.constant.MessageList.SUCCESS;
 
 @Service
 public class ClassroomUseCaseImpl implements ClassroomUseCase {
@@ -38,7 +39,7 @@ public class ClassroomUseCaseImpl implements ClassroomUseCase {
         return classroomService
                 .findAll()
                 .stream()
-                .map(ClassroomDTO::new)
+                .map(ClassroomMapper::convert2DTO)
                 .collect(Collectors.toList());
     }
 
@@ -49,7 +50,7 @@ public class ClassroomUseCaseImpl implements ClassroomUseCase {
             throw new ExistedEntityException(CLASSROOM_CODE_EXISTED);
         }
 
-        classroomService.create(dto.toEntity());
+        classroomService.create(ClassroomMapper.convert2Entity(dto));
         return new MessageDTO(SUCCESS);
     }
 
@@ -86,6 +87,6 @@ public class ClassroomUseCaseImpl implements ClassroomUseCase {
         if (classroomOpt.isEmpty())
             throw new NotFoundEntityException("Not found classroom with id" + id);
 
-        return new ClassroomDTO(classroomOpt.get());
+        return ClassroomMapper.convert2DTO(classroomOpt.get());
     }
 }

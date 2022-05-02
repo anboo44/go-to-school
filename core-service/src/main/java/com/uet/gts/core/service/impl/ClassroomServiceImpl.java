@@ -1,6 +1,6 @@
 package com.uet.gts.core.service.impl;
 
-import com.uet.gts.core.common.exception.ex.BusinessException;
+import com.uet.gts.common.exception.BusinessException;
 import com.uet.gts.core.model.entity.Classroom;
 import com.uet.gts.core.model.entity.Student;
 import com.uet.gts.core.model.entity.Teacher;

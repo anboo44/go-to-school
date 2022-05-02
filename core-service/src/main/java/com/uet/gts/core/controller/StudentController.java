@@ -1,12 +1,13 @@
 package com.uet.gts.core.controller;
 
-import com.uet.gts.core.model.dto.ResponseDTO;
-import com.uet.gts.core.model.dto.StudentDTO;
+import com.uet.gts.common.dto.ResponseDTO;
+import com.uet.gts.common.dto.core.StudentDTO;
 import com.uet.gts.core.usecase.StudentUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;

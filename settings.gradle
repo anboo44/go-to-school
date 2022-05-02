@@ -6,4 +6,5 @@ include 'discovery-service'
 include 'core-service'
 include 'logger-service'
 include 'report-service'
+include 'common-lib'
 

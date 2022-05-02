@@ -1,6 +1,6 @@
 package com.uet.gts.core.model.vo;
 
-import com.uet.gts.core.model.base.Code;
+import com.uet.gts.common.util.Code;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

@@ -1,7 +1,7 @@
 package com.uet.gts.core.controller;
 
-import com.uet.gts.core.model.dto.ResponseDTO;
-import com.uet.gts.core.model.dto.TeacherDTO;
+import com.uet.gts.common.dto.ResponseDTO;
+import com.uet.gts.common.dto.core.TeacherDTO;
 import com.uet.gts.core.usecase.TeacherUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

@@ -1,8 +1,8 @@
 package com.uet.gts.core.usecase;
 
-import com.uet.gts.core.model.dto.MessageDTO;
-import com.uet.gts.core.model.dto.ResponseDTO;
-import com.uet.gts.core.model.dto.StudentDTO;
+import com.uet.gts.common.dto.MessageDTO;
+import com.uet.gts.common.dto.ResponseDTO;
+import com.uet.gts.common.dto.core.StudentDTO;
 
 public interface StudentUseCase {
     StudentDTO getById(Integer sid);

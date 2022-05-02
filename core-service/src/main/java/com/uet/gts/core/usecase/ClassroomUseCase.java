@@ -1,8 +1,8 @@
 package com.uet.gts.core.usecase;
 
-import com.uet.gts.core.model.dto.ClassroomDTO;
-import com.uet.gts.core.model.dto.ClassroomMemberDTO;
-import com.uet.gts.core.model.dto.MessageDTO;
+import com.uet.gts.common.dto.MessageDTO;
+import com.uet.gts.common.dto.core.ClassroomDTO;
+import com.uet.gts.common.dto.core.ClassroomMemberDTO;
 
 import java.util.List;
 

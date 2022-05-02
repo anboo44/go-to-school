@@ -1,14 +1,23 @@
 package com.uet.gts.core.usecase.impl;
 
-import com.uet.gts.core.model.dto.*;
+import com.uet.gts.common.dto.MessageDTO;
+import com.uet.gts.common.dto.MetaDTO;
+import com.uet.gts.common.dto.PaginationDTO;
+import com.uet.gts.common.dto.ResponseDTO;
+import com.uet.gts.common.dto.core.StudentDTO;
+import com.uet.gts.core.model.mapper.StudentMapper;
 import com.uet.gts.core.service.StudentService;
 import com.uet.gts.core.usecase.StudentUseCase;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import javax.persistence.EntityNotFoundException;
 import java.util.stream.Collectors;
-import static com.uet.gts.core.common.constant.ErrorList.*;
-import static com.uet.gts.core.common.constant.MessageList.*;
+
+import static com.uet.gts.common.constant.ErrorList.INVALID_OFFSET;
+import static com.uet.gts.common.constant.ErrorList.STUDENT_NOT_FOUND;
+import static com.uet.gts.common.constant.MessageList.SUCCESS;
 
 @Service
 public class StudentUseCaseImpl implements StudentUseCase {
@@ -23,7 +32,7 @@ public class StudentUseCaseImpl implements StudentUseCase {
             throw new EntityNotFoundException(STUDENT_NOT_FOUND);
         }
 
-        return new StudentDTO(studentOpt.get());
+        return StudentMapper.convert2DTO(studentOpt.get());
     }
 
     @Override
@@ -44,7 +53,7 @@ public class StudentUseCaseImpl implements StudentUseCase {
 
         /* Handle and build response */
         var pageData = studentService.getByMultiParamsV2(name, orderBy, limit, offset - 1);
-        var data = pageData.getContent().stream().map(StudentDTO::new).collect(Collectors.toList());
+        var data = pageData.getContent().stream().map(StudentMapper::convert2DTO).collect(Collectors.toList());
 
         var meta = buildMeta(pageData.getTotalElements(), data.size(), limit, offset);
         return ResponseDTO.builder()
@@ -54,8 +63,9 @@ public class StudentUseCaseImpl implements StudentUseCase {
     }
 
     @Override
+    @SneakyThrows
     public MessageDTO create(StudentDTO dto) {
-        studentService.create(dto.toEntity(false));
+        studentService.create(StudentMapper.convert2Entity(dto));
         return new MessageDTO(SUCCESS);
     }
 
