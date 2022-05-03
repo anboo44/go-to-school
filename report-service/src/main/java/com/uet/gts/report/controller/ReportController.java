@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/v1/report", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -30,9 +33,10 @@ public class ReportController {
     }
 
     @GetMapping("/classroom")
-    public ResponseDTO getClassroomReport() {
+    public ResponseDTO getClassroomReport(@RequestParam("type") Optional<String> typeOpt) {
         return new ResponseDTO(
-                reportService.makeClassroomReport()
+                typeOpt.map(t -> t.equals("grpc") ? reportService.makeClassroomGrpcReport(): null)
+                       .orElse(reportService.makeClassroomReport())
         );
     }
 }

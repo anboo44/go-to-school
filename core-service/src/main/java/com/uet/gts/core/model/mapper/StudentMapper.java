@@ -2,6 +2,7 @@ package com.uet.gts.core.model.mapper;
 
 import com.uet.gts.common.constant.DateFormatter;
 import com.uet.gts.common.dto.core.StudentDTO;
+import com.uet.gts.common.proto.StudentProtobuf;
 import com.uet.gts.core.model.entity.Student;
 import com.uet.gts.core.model.vo.Gender;
 import com.uet.gts.core.model.vo.GroupType;
@@ -32,5 +33,17 @@ public class StudentMapper {
         student.setGroupType(GroupType.fromValue(dto.getGroupType()));
 
         return student;
+    }
+
+    public static StudentProtobuf convert2Protobuf(Student student) {
+        if (student == null) return null;
+        return StudentProtobuf.newBuilder()
+                .setId(student.getId())
+                .setName(student.getName())
+                .setGender(student.getGender().getCode())
+                .setDateOfBirth(DateFormatter.DATE.format(student.getDateOfBirth()))
+                .setParentName(student.getParentName())
+                .setGroupType(student.getGroupType().toString().toLowerCase())
+                .build();
     }
 }

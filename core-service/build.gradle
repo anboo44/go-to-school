@@ -17,8 +17,7 @@ dependencies {
     implementation 'org.postgresql:postgresql:42.3.4'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'net.devh:grpc-spring-boot-starter:2.13.1.RELEASE'
 
-    implementation(project(":common-lib")) {
-        transitive = false
-    }
+    implementation project(":common-lib")
 }

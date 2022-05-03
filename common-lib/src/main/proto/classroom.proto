@@ -1,0 +1,34 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+
+option java_multiple_files = true;
+option java_package = "com.uet.gts.common.proto";
+option java_outer_classname = "ClassroomProto";
+
+service ClassroomService {
+  rpc GetList (google.protobuf.Empty) returns (stream ClassroomProtobuf) {}
+}
+
+message TeacherProtobuf {
+  int32 id = 1;
+  string name = 2;
+  int32 age = 3;
+  int32 expYear = 4;
+}
+
+message StudentProtobuf {
+  int32 id = 1;
+  string name = 2;
+  string gender = 3;
+  string dateOfBirth = 4;
+  string parentName = 5;
+  string groupType = 6;
+}
+
+message ClassroomProtobuf {
+  int32 id = 1;
+  string code = 2;
+  int32 maxStudent = 3;
+  optional TeacherProtobuf teacher = 4;
+  repeated StudentProtobuf students = 5;
+}

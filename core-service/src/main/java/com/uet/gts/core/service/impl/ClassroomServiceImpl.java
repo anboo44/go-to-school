@@ -22,7 +22,7 @@ public class ClassroomServiceImpl implements ClassroomService {
 
     @Override
     public List<Classroom> findAll() {
-        return classroomRepository.findAll();
+        return classroomRepository.findAllByOrderByIdAsc();
     }
 
     @Override

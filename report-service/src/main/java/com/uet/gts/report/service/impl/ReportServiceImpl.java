@@ -14,6 +14,8 @@ import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -98,6 +100,13 @@ public class ReportServiceImpl implements ReportService {
     public ClassroomReportDTO makeClassroomReport() {
         var classrooms = reportRepository.findAllClassrooms();
         var reportDTO = new ClassroomReportDTO(classrooms);
+        actionLogPublisher.sendMessage(new ClassroomEvent(reportDTO));
+        return reportDTO;
+    }
+
+    public ClassroomReportDTO makeClassroomGrpcReport() {
+        var classrooms = reportRepository.findAllClassroomsAsProtobuf();
+        var reportDTO = new ClassroomReportDTO(new HashSet<>(classrooms));
         actionLogPublisher.sendMessage(new ClassroomEvent(reportDTO));
         return reportDTO;
     }

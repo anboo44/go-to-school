@@ -5,6 +5,8 @@ import com.uet.gts.common.dto.core.ClassroomDTO;
 import com.uet.gts.common.dto.core.ClassroomMemberDTO;
 import com.uet.gts.common.exception.ExistedEntityException;
 import com.uet.gts.common.exception.NotFoundEntityException;
+import com.uet.gts.common.proto.ClassroomProtobuf;
+import com.uet.gts.common.proto.TeacherProtobuf;
 import com.uet.gts.core.model.entity.Student;
 import com.uet.gts.core.model.mapper.ClassroomMapper;
 import com.uet.gts.core.service.ClassroomService;
@@ -88,5 +90,12 @@ public class ClassroomUseCaseImpl implements ClassroomUseCase {
             throw new NotFoundEntityException("Not found classroom with id" + id);
 
         return ClassroomMapper.convert2DTO(classroomOpt.get());
+    }
+
+    @Override
+    public List<ClassroomProtobuf> findAllAsProto() {
+        return classroomService.findAll().stream()
+                .map(ClassroomMapper::convert2Protobuf)
+                .collect(Collectors.toList());
     }
 }

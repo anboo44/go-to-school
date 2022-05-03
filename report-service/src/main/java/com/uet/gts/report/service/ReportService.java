@@ -6,4 +6,5 @@ public interface ReportService {
     StudentReportDTO makeStudentReport();
     TeacherReportDTO makeTeacherReport();
     ClassroomReportDTO makeClassroomReport();
+    ClassroomReportDTO makeClassroomGrpcReport();
 }

@@ -2,6 +2,7 @@ package com.uet.gts.core.model.mapper;
 
 import com.uet.gts.common.constant.DateFormatter;
 import com.uet.gts.common.dto.core.TeacherDTO;
+import com.uet.gts.common.proto.TeacherProtobuf;
 import com.uet.gts.core.model.entity.Teacher;
 
 import java.text.ParseException;
@@ -26,5 +27,15 @@ public class TeacherMapper {
         teacher.setWorkStartDate(DateFormatter.DATE.parse(dto.getWorkStartDate()));
 
         return teacher;
+    }
+
+    public static TeacherProtobuf convert2Protobuf(Teacher teacher) {
+        if (teacher == null) return null;
+        return TeacherProtobuf.newBuilder()
+                .setId(teacher.getId())
+                .setName(teacher.getName())
+                .setAge(teacher.getAge())
+                .setExpYear(teacher.getExpYear())
+                .build();
     }
 }

@@ -40,5 +40,6 @@ public class Classroom  extends DateAudit implements Serializable {
 
     @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @OrderBy("id asc")
-    private Set<Student> students = new HashSet<>();
+    @Builder.Default
+    private Set<Student> students = new HashSet<Student>();
 }

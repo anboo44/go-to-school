@@ -11,7 +11,7 @@
 7. UI Service: display data. Using ReactJs.
 ```
 
-### Setup
+## Setup
 
-Comming soon
+### 1. Gateway Service
 

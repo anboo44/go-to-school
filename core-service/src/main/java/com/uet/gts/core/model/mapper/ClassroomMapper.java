@@ -1,6 +1,7 @@
 package com.uet.gts.core.model.mapper;
 
 import com.uet.gts.common.dto.core.ClassroomDTO;
+import com.uet.gts.common.proto.ClassroomProtobuf;
 import com.uet.gts.core.model.entity.Classroom;
 
 import java.util.stream.Collectors;
@@ -25,5 +26,23 @@ public class ClassroomMapper {
         classroom.setSize(dto.getMaxStudent());
 
         return classroom;
+    }
+
+    public static ClassroomProtobuf convert2Protobuf(Classroom classroom) {
+        if (classroom == null) return null;
+
+        var studentsProtobuf = classroom.getStudents().stream()
+                .map(StudentMapper::convert2Protobuf)
+                .collect(Collectors.toList());
+        var builder = ClassroomProtobuf.newBuilder()
+                .setId(classroom.getId())
+                .setCode(classroom.getCode())
+                .setMaxStudent(classroom.getSize())
+                .addAllStudents(studentsProtobuf);
+        if (classroom.getTeacher() != null) {
+            builder.setTeacher(TeacherMapper.convert2Protobuf(classroom.getTeacher()));
+        }
+
+        return builder.build();
     }
 }
