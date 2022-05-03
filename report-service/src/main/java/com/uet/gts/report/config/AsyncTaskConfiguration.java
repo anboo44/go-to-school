@@ -6,7 +6,7 @@ import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.core.task.TaskExecutor;
 
 @Configuration
-public class ActionLogListenerConfiguration {
+public class AsyncTaskConfiguration {
 
     @Bean
     TaskExecutor executeTask() {

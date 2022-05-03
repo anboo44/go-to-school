@@ -21,7 +21,6 @@ public class ActionLogListener implements ApplicationListener<EventMessage> {
     public void onApplicationEvent(EventMessage event) {
         var data = event.getData();
 
-        System.out.println("Send action log: " + event.getData());
         if (data instanceof StudentEvent) {
             StudentEvent studentEvent = (StudentEvent) data;
             logRepository.logStudentReport(studentEvent.getData());
