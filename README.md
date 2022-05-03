@@ -1,6 +1,6 @@
 ## GO-TO-SCHOOL
 
-### ===========[ There is an example for SpringBoot Micro-services ]================
+### ===[ There is an example for SpringBoot Micro-services ]===
 
 ### Service Raw Information
 ```
