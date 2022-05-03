@@ -32,14 +32,14 @@ II. Install postgres database
 
 ## Micro-Services
 
-####I. Common-lib
+#### I. Common-lib
 
 - Module name: `gts-common-lib`
 - Contain base package for another services: annotation, constant, dto, exception, util, protobuf
 - Using google.protobuf lib to convert `.proto` file to `.java` file
 - This module is compiled with another modules
 
-####II. Discovery-service
+#### II. Discovery-service
 
 - Module name: `gts-discovery-service`
 - Using `eureka-server` for exploring child services
@@ -47,7 +47,7 @@ II. Install postgres database
 - View all registered services at local: `http://localhost:8711`
 - Run `DiscoveryApplication.java` to start service
 
-####III. Gateway-service
+#### III. Gateway-service
 
 - Module name: `gts-gateway-service`
 - Using `spring-cloud-gateway`
@@ -55,7 +55,7 @@ II. Install postgres database
 - Info: all requests will be authenticated at gateway, before coming to destination service
 - Run `GatewayApplication.java` to start service
 
-####IV. Core-service
+#### IV. Core-service
 
 - Module name: `gts-core-service`
 - Info: Process main business logic for `teacher`, `student`, `classroom`
@@ -67,7 +67,7 @@ II. Install postgres database
   + Test API: `http://localhost:<port>/core/api/v1/hello` (if run through gateway, please set `<port>` to 8080)
   + Test gRPC: Using Postman, choose gRPC request. Set server URL: `http://localhost:<port>`. Choose `classroom.proto` (in common-lib). Select valid method. Finally, click Invoke
 
-####V. Report-service
+#### V. Report-service
 
 - Module name: `gts-report-service`
 - Info: Connect to `gts-core-service` to provide report through rest apis
@@ -75,11 +75,11 @@ II. Install postgres database
 - When client call apis to get report, there are message as action log sent to kafka
 - Run `ReportApplication.java` to start service
 
-####VI. Logger-service
+#### VI. Logger-service
 
 - Module name: `gts-logger-service`
 - Info: Receive messages from report-service via kafka and then, show them on console.
 - Run `LoggerApplication.java` to start service
 
-####VII. Auth-service
+#### VII. Auth-service
 Updating ...
