@@ -73,13 +73,20 @@ II. Install postgres database
 - Info: Connect to `gts-core-service` to provide report through rest apis
 - Report-service connect Core-service by using RestAPI & gRPC
 - When client call apis to get report, there are message as action log sent to kafka
-- Run `ReportApplication.java` to start service
+- Running:
+  + Need start Core-service & Kafka (view setup step) at first 
+  + Run `ReportApplication.java` to start service
+  + Start a kafka consumer on the terminal. Read the events from topic `report-logger` (view setup step for get detail)
+  + Test API: `http://localhost:<port>/core/api/v1/report/student` (if run through gateway, please set `<port>` to 8080)
 
 #### VI. Logger-service
 
 - Module name: `gts-logger-service`
 - Info: Receive messages from report-service via kafka and then, show them on console.
-- Run `LoggerApplication.java` to start service
-
+- Running:
+  + Start Kafka & Core-service & Report-service at first
+  + Run `LoggerApplication.java` to start service
+  + Make an API caller to `Report-service`. And then, view `logger-service`'s console to see event message.
+  
 #### VII. Auth-service
 Updating ...
