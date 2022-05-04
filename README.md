@@ -90,3 +90,7 @@ II. Install postgres database
   
 #### VII. Auth-service
 Updating ...
+
+## TODO
+- Add caching for `GET API` or `Get data from DB` by using Spring-Cache or Redis
+- 

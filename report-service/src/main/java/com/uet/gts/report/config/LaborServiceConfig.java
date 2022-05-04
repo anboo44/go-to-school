@@ -30,6 +30,7 @@ public class LaborServiceConfig {
         return String.format("%s://%s:%s", PROTOCOL, ins.getHost(), ins.getPort());
     }
 
+    // TODO: Cache instance in 5 minutes. After, refresh instance by random instead of fixed at head
     private ServiceInstance randomInstance(String targetServiceName) {
         var instances = discoveryClient.getInstances(targetServiceName);
         if (instances.isEmpty()) {
