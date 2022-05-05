@@ -19,7 +19,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name = "student")
+@Table(name = "gts_student")
 public class Student extends DateAudit implements Serializable {
     private static final long serialVersionUID = -1862067681459879159L;
 
@@ -51,6 +51,6 @@ public class Student extends DateAudit implements Serializable {
     private GroupType groupType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "classroom_id", nullable = true)
+    @JoinColumn(name = "classroom_id")
     private Classroom classroom;
 }

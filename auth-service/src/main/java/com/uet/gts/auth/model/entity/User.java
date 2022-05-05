@@ -16,7 +16,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name = "user")
+@Table(name = "gts_user")
 public class User implements Serializable {
     private static final long serialVersionUID = -1322009681459879159L;
 
@@ -25,7 +25,7 @@ public class User implements Serializable {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "name", nullable = false, unique = true, length = 100)
+    @Column(name = "username", nullable = false, unique = true, length = 100)
     private String username;
 
     @Column(name = "password", nullable = false)

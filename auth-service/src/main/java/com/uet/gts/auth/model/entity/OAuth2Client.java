@@ -11,7 +11,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name = "oauth2_client")
+@Table(name = "gts_oauth2_client")
 public class OAuth2Client implements Serializable {
     private static final long serialVersionUID = -1122009681459879159L;
 

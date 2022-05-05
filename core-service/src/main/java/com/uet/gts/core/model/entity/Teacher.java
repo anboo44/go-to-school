@@ -18,7 +18,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name = "teacher")
+@Table(name = "gts_teacher")
 public class Teacher extends DateAudit implements Serializable {
     private static final long serialVersionUID = -1322067681459879159L;
 

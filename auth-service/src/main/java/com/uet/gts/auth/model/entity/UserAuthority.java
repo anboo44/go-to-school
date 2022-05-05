@@ -16,7 +16,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name = "authority")
+@Table(name = "gts_authority")
 public class UserAuthority implements Serializable {
     private static final long serialVersionUID = -2322009681459879159L;
 

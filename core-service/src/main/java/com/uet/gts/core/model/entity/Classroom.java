@@ -16,7 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name = "classroom")
+@Table(name = "gts_classroom")
 public class Classroom  extends DateAudit implements Serializable {
     private static final long serialVersionUID = -1322009681459879159L;
 
@@ -41,5 +41,5 @@ public class Classroom  extends DateAudit implements Serializable {
     @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @OrderBy("id asc")
     @Builder.Default
-    private Set<Student> students = new HashSet<Student>();
+    private Set<Student> students = new HashSet<>();
 }
