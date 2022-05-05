@@ -12,12 +12,13 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.liquibase:liquibase-core'
     implementation 'com.zaxxer:HikariCP:5.0.1'
-    implementation 'org.springdoc:springdoc-openapi-ui:1.6.7'
-    implementation 'mysql:mysql-connector-java:8.0.28'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.8'
+    implementation 'mysql:mysql-connector-java:8.0.29'
     implementation 'org.postgresql:postgresql:42.3.4'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'net.devh:grpc-spring-boot-starter:2.13.1.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 
     implementation project(":common-lib")
 }

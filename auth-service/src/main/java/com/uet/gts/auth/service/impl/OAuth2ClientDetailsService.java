@@ -7,6 +7,8 @@ import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
 import org.springframework.security.oauth2.provider.client.BaseClientDetails;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -35,6 +37,7 @@ public class OAuth2ClientDetailsService implements ClientDetailsService {
         basicClientDetail.setRegisteredRedirectUri(Set.of(callbackUrls));
         basicClientDetail.setAccessTokenValiditySeconds(client.getAccessTokenValidity());
         basicClientDetail.setRefreshTokenValiditySeconds(client.getRefreshTokenValidity());
+        basicClientDetail.setResourceIds(List.of("oauth2-resource"));
 
         return basicClientDetail;
     }

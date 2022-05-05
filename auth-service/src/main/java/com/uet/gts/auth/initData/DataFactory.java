@@ -57,7 +57,7 @@ public class DataFactory {
                 .clientId("web-client")
                 .clientSecret("Aa@123456")
                 .scope("read,write")
-                .authorizedGrantType("password,refresh_token,client_credentials")
+                .authorizedGrantType("password,refresh_token,client_credentials,authorization_code,implicit")
                 .callbackUrl("https://google.vn")
                 .memo("Client Demo")
                 .build();
