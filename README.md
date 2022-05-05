@@ -93,4 +93,8 @@ Updating ...
 
 ## TODO
 - Add caching for `GET API` or `Get data from DB` by using Spring-Cache or Redis
-- Custom information in JWT at auth-service
+- Add postman guideline for auth-service to view at here: https://h.readthedocs.io/en/latest/api/authorization/#client-credentials
+- Custom information in JWT at auth-service: extends `JwtAccessTokenConverter.java` and override `enhance` method
+- IMPL to follow: https://www.baeldung.com/spring-security-oauth2-jws-jwk
+- Add cloud-load-balancer dependence for call api from report service to core service
+- Create external service, impl SSO to follow: https://shekhargulati.com/2018/02/15/single-sign-on-in-spring-boot-applications-with-spring-security-oauth
