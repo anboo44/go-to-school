@@ -1,5 +1,5 @@
 -- Create student table
-CREATE TABLE student (
+CREATE TABLE gts_student (
   id serial PRIMARY KEY,
   name VARCHAR (255) NOT NULL,
   gender VARCHAR (10) NOT NULL,
@@ -9,5 +9,5 @@ CREATE TABLE student (
   classroom_id smallint NULL,
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NULL,
-  constraint st_cl foreign key(classroom_id) REFERENCES classroom(id)
+  constraint fk_student_classroom foreign key(classroom_id) REFERENCES gts_classroom(id)
 );

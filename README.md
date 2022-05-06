@@ -55,7 +55,23 @@ II. Install postgres database
 - Info: all requests will be authenticated at gateway, before coming to destination service
 - Run `GatewayApplication.java` to start service
 
-#### IV. Core-service
+#### IV. Auth-service
+
+- Module name: `gts-auth-service`
+- Info: Apply OAuth2 with Jwt for authentication
+- Add postman guideline for auth-service to view at here: https://h.readthedocs.io/en/latest/api/authorization/#client-credentials
+- Springboot support 3 ways for tokenStore
+  + InMemoryTokenStore: AccessToken is stored in `ConcurrentHashMap`(memory). No use for distributed system because sync.
+  + JdbcTokenStore: AccessToken is stored in DB
+  + RedisTokenStore: AccessToken is stored in redis server
+  + JwtTokenStore: Authorizaton Server doesn't store AccessToken. Using public key for validating. So, Jwt is invalid when it is expired. Please set short-time for it.
+- Running:
+  + POST /oauth/token: for login. Body request: grant_type: password, username, password
+  + GET  /oauth/check_token?token=...
+  + POST /oauth/token: check token. Body request: grant_type: refresh_token, username, password, refresh_token
+  + Running `AuthApplication.java` to start service
+
+#### V. Core-service
 
 - Module name: `gts-core-service`
 - Info: Process main business logic for `teacher`, `student`, `classroom`
@@ -67,7 +83,7 @@ II. Install postgres database
   + Test API: `http://localhost:<port>/core/api/v1/hello` (if run through gateway, please set `<port>` to 8080)
   + Test gRPC: Using Postman, choose gRPC request. Set server URL: `http://localhost:<port>`. Choose `classroom.proto` (in common-lib). Select valid method. Finally, click Invoke
 
-#### V. Report-service
+#### VI. Report-service
 
 - Module name: `gts-report-service`
 - Info: Connect to `gts-core-service` to provide report through rest apis
@@ -79,7 +95,7 @@ II. Install postgres database
   + Start a kafka consumer on the terminal. Read the events from topic `report-logger` (view setup step for get detail)
   + Test API: `http://localhost:<port>/core/api/v1/report/student` (if run through gateway, please set `<port>` to 8080)
 
-#### VI. Logger-service
+#### VII. Logger-service
 
 - Module name: `gts-logger-service`
 - Info: Receive messages from report-service via kafka and then, show them on console.
@@ -87,14 +103,11 @@ II. Install postgres database
   + Start Kafka & Core-service & Report-service at first
   + Run `LoggerApplication.java` to start service
   + Make an API caller to `Report-service`. And then, view `logger-service`'s console to see event message.
-  
-#### VII. Auth-service
-Updating ...
 
 ## TODO
 - Add caching for `GET API` or `Get data from DB` by using Spring-Cache or Redis
-- Add postman guideline for auth-service to view at here: https://h.readthedocs.io/en/latest/api/authorization/#client-credentials
 - Custom information in JWT at auth-service: extends `JwtAccessTokenConverter.java` and override `enhance` method
 - IMPL to follow: https://www.baeldung.com/spring-security-oauth2-jws-jwk
 - Add cloud-load-balancer dependence for call api from report service to core service
 - Create external service, impl SSO to follow: https://shekhargulati.com/2018/02/15/single-sign-on-in-spring-boot-applications-with-spring-security-oauth
+- Authorize with Role at another services.

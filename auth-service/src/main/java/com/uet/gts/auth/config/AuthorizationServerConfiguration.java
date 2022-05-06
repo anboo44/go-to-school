@@ -1,14 +1,17 @@
 package com.uet.gts.auth.config;
 
+import com.uet.gts.auth.model.dto.UserDetailDTO;
 import com.uet.gts.auth.service.impl.OAuth2ClientDetailsService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -17,10 +20,16 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.error.DefaultWebResponseExceptionTranslator;
 import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 import java.security.KeyPair;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Configuration
 @EnableAuthorizationServer
@@ -54,19 +63,37 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
+        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+        List<TokenEnhancer> tokenEnhancers = new ArrayList<>();
+        tokenEnhancers.add(tokenEnhancer());
+        tokenEnhancers.add(jwtAccessTokenConverter());
+        tokenEnhancerChain.setTokenEnhancers(tokenEnhancers);
+
         endpoints.authenticationManager(authenticationManager)
-                 .tokenStore(tokenStore())
+//                 .tokenStore(tokenStore())
                  .userDetailsService(userDetailsService)
-                 .accessTokenConverter(tokenEnhancer())
+                 .tokenEnhancer(tokenEnhancerChain)
+                 .reuseRefreshTokens(true)
                  .exceptionTranslator(loggingExceptionTranslator());
     }
 
     //===============[ Support functions ]======================
     private JwtTokenStore tokenStore() {
-        return new JwtTokenStore(tokenEnhancer());
+        return new JwtTokenStore(jwtAccessTokenConverter());
     }
 
-    private JwtAccessTokenConverter tokenEnhancer() {
+    @Bean
+    public TokenEnhancer tokenEnhancer() {
+        return (accessToken, authentication) -> {
+            Map<String, Object> map = new HashMap<>(1);
+            UserDetailDTO userDetailDTO = (UserDetailDTO) authentication.getUserAuthentication().getPrincipal();
+            map.put("userId", userDetailDTO.getUser().getId());
+            ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(map);
+            return accessToken;
+        };
+    }
+
+    private JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         converter.setKeyPair(keyPair());
         return converter;

@@ -2,6 +2,7 @@ package com.uet.gts.auth.model.dto;
 
 import com.uet.gts.auth.model.entity.User;
 import com.uet.gts.auth.model.enumeration.UserStatus;
+import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 @Setter
+@Getter
 public class UserDetailDTO implements UserDetails {
 
     private User user;

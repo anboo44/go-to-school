@@ -1,5 +1,5 @@
 -- Create teacher table
-create table teacher (
+create table gts_teacher (
    id serial primary key,
    age smallint not null,
    name varchar(255) not null,
