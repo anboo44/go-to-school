@@ -23,7 +23,6 @@ import org.springframework.security.oauth2.provider.error.WebResponseExceptionTr
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 import java.security.KeyPair;
 import java.util.ArrayList;
@@ -31,6 +30,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * .reuseRefreshTokens(true)
+ * 1. Reuse: When the access_token expires and refreshes, the refresh token expiration time does not change, and the time when it was first generated shall prevail.
+ * 2. Non-reuse: When the access_token expires and refreshes, the refresh_token expiration time continues, and the refresh_token is refreshed within the validity period of the refresh_token without the need to log in again.
+ */
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
@@ -70,7 +74,6 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         tokenEnhancerChain.setTokenEnhancers(tokenEnhancers);
 
         endpoints.authenticationManager(authenticationManager)
-//                 .tokenStore(tokenStore())
                  .userDetailsService(userDetailsService)
                  .tokenEnhancer(tokenEnhancerChain)
                  .reuseRefreshTokens(true)
@@ -78,10 +81,6 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     }
 
     //===============[ Support functions ]======================
-    private JwtTokenStore tokenStore() {
-        return new JwtTokenStore(jwtAccessTokenConverter());
-    }
-
     @Bean
     public TokenEnhancer tokenEnhancer() {
         return (accessToken, authentication) -> {
