@@ -1,7 +1,6 @@
 package com.uet.gts.logger.config;
 
 import com.uet.gts.common.dto.KafkaEventDTO;
-import lombok.Getter;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;

@@ -6,7 +6,6 @@ import com.uet.gts.common.dto.core.ClassroomMemberDTO;
 import com.uet.gts.common.exception.ExistedEntityException;
 import com.uet.gts.common.exception.NotFoundEntityException;
 import com.uet.gts.common.proto.ClassroomProtobuf;
-import com.uet.gts.common.proto.TeacherProtobuf;
 import com.uet.gts.core.model.entity.Student;
 import com.uet.gts.core.model.mapper.ClassroomMapper;
 import com.uet.gts.core.service.ClassroomService;

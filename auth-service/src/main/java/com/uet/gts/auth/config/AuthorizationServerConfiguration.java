@@ -4,6 +4,7 @@ import com.uet.gts.auth.model.dto.UserDetailDTO;
 import com.uet.gts.auth.service.OAuth2ClientDetailsService;
 import com.uet.gts.common.constant.KeyConstant;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,6 +40,7 @@ import java.util.Map;
  */
 @Configuration
 @EnableAuthorizationServer
+@Slf4j
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
@@ -52,6 +54,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    private LogInterceptor logInterceptor;
 
     //===============[ Main functions ]======================
     //------- All other fields & functions to support these main functions ---------
@@ -78,13 +83,26 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         endpoints.authenticationManager(authenticationManager)
                  .userDetailsService(userDetailsService)
                  .tokenEnhancer(tokenEnhancerChain)
+                 .addInterceptor(logInterceptor)
                  .reuseRefreshTokens(true)
-                 .exceptionTranslator(loggingExceptionTranslator());
+                 .exceptionTranslator(exceptionTranslator());
     }
 
     //===============[ Support functions ]======================
     @Bean
-    public TokenEnhancer tokenEnhancer() {
+    public KeyPair keyPair() {
+        // Get the key pair from the certificate jwt.jks in the classpath directory
+        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(
+                new ClassPathResource(resource.getKeyStore()),
+                resource.getKeyPairPassword().toCharArray()
+        );
+        return keyStoreKeyFactory.getKeyPair(
+                resource.getKeyPairAlias(),
+                resource.getKeyPairPassword().toCharArray()
+        );
+    }
+
+    private TokenEnhancer tokenEnhancer() {
         return (accessToken, authentication) -> {
             Map<String, Object> map = new HashMap<>(1);
             UserDetailDTO userDetailDTO = (UserDetailDTO) authentication.getUserAuthentication().getPrincipal();
@@ -101,23 +119,12 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         return converter;
     }
 
-    @Bean
-    public KeyPair keyPair() {
-        // Get the key pair from the certificate jwt.jks in the classpath directory
-        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(
-                new ClassPathResource(resource.getKeyStore()), resource.getKeyPairPassword().toCharArray()
-        );
-        return keyStoreKeyFactory.getKeyPair(
-                resource.getKeyPairAlias(),
-                resource.getKeyPairPassword().toCharArray()
-        );
-    }
-
-    private WebResponseExceptionTranslator loggingExceptionTranslator() {
+    private WebResponseExceptionTranslator exceptionTranslator() {
         return new DefaultWebResponseExceptionTranslator() {
             @Override
             public ResponseEntity<OAuth2Exception> translate(Exception e) throws Exception {
                 // e.printStackTrace();
+                log.error("====[ ERROR: " + e.getMessage() + " ]====");
                 ResponseEntity<OAuth2Exception> responseEntity = super.translate(e);
                 HttpHeaders headers = new HttpHeaders();
                 headers.setAll(responseEntity.getHeaders().toSingleValueMap());

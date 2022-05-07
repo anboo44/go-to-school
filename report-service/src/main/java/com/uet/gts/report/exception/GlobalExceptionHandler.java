@@ -2,8 +2,8 @@ package com.uet.gts.report.exception;
 
 import com.uet.gts.common.dto.ErrorDTO;
 import com.uet.gts.common.dto.ResponseDTO;
-import com.uet.gts.common.exception.ExternalApiCallException;
 import com.uet.gts.common.exception.BusinessException;
+import com.uet.gts.common.exception.ExternalApiCallException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
 import static com.uet.gts.common.constant.ErrorList.UNKNOWN_ERROR;
 
 @ControllerAdvice

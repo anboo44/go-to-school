@@ -1,7 +1,8 @@
 package com.uet.gts.core.controller;
 
 import com.google.protobuf.Empty;
-import com.uet.gts.common.proto.*;
+import com.uet.gts.common.proto.ClassroomProtobuf;
+import com.uet.gts.common.proto.ClassroomServiceGrpc;
 import com.uet.gts.core.usecase.ClassroomUseCase;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;

@@ -1,8 +1,14 @@
-server:
-  port: 8080
+logging.level.org.springframework: info
+server.port: 8080
 
+#using local public-key or jwkSetUri
+#spring.security.oauth2.resourceserver.jwt.public-key-location: classpath:public-key.txt
 spring:
-  security.oauth2.resourceserver.jwt.public-key-location: classpath:public.txt
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwkSetUri: ${JWK_URI:http://localhost:8000/auth/.well-known/jwks.json}
   application.name: gts-gateway-service
   main:
     web-application-type: reactive
@@ -16,16 +22,21 @@ spring:
         - id: gts-core-service
           uri: lb://gts-core-service
           predicates:
-            - Path=/core/api/**
+            - Path=/core/**
         - id: gts-report-service
           uri: lb://gts-report-service
           predicates:
-            - Path=/report/api/**
+            - Path=/report/**
+        - id: gts-auth-service
+          uri: lb://gts-auth-service
+          predicates:
+            - Path=/auth/**
 
 eureka:
   instance:
     instanceId: ${spring.application.name}
     prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 5
   client:
     register-with-eureka: true
     fetch-registry: true

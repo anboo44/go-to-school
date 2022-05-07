@@ -8,7 +8,7 @@ import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 @Data
 @Configuration
-public class ApiConfig {
+public class GrpcApiConfig {
 
     @Bean
     public ProtobufJsonFormatHttpMessageConverter protobufHttpMessageConverter() {

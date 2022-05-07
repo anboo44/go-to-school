@@ -32,6 +32,8 @@ II. Install postgres database
 
 ## Micro-Services
 
+Please run all services by below ordered
+
 #### I. Common-lib
 
 - Module name: `gts-common-lib`
@@ -43,7 +45,7 @@ II. Install postgres database
 
 - Module name: `gts-discovery-service`
 - Using `eureka-server` for exploring child services
-- Service starts at fixed port: `8711`
+- Service starts at fixed port: `8761`
 - View all registered services at local: `http://localhost:8711`
 - Run `DiscoveryApplication.java` to start service
 
@@ -59,6 +61,7 @@ II. Install postgres database
 
 - Module name: `gts-auth-service`
 - Info: Apply OAuth2 with Jwt for authentication
+- Service starts at fixed port: `8000`
 - Add postman guideline for auth-service to view at here: https://h.readthedocs.io/en/latest/api/authorization/#client-credentials
 - Springboot support 3 ways for tokenStore
   + InMemoryTokenStore: AccessToken is stored in `ConcurrentHashMap`(memory). No use for distributed system because sync.
@@ -105,9 +108,8 @@ II. Install postgres database
   + Make an API caller to `Report-service`. And then, view `logger-service`'s console to see event message.
 
 ## TODO
-- Add caching for `GET API` or `Get data from DB` by using Spring-Cache or Redis
-- Custom information in JWT at auth-service: extends `JwtAccessTokenConverter.java` and override `enhance` method
-- IMPL to follow: https://www.baeldung.com/spring-security-oauth2-jws-jwk
+- Add caching for `GET API` or `Get data from DB` by using Redis
 - Add cloud-load-balancer dependence for call api from report service to core service
 - Create external service, impl SSO to follow: https://shekhargulati.com/2018/02/15/single-sign-on-in-spring-boot-applications-with-spring-security-oauth
-- Authorize with Role at another services.
+- Add system architecture image
+- Add docker files
