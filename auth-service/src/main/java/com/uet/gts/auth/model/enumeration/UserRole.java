@@ -8,9 +8,9 @@ import org.springframework.security.core.GrantedAuthority;
 @AllArgsConstructor
 public enum UserRole implements Code<Integer>, GrantedAuthority {
 
-    ROLE_ADMIN(1),
-    ROLE_MANAGER(2),
-    ROLE_USER(3);
+    ADMIN(1),
+    MANAGER(2),
+    USER(3);
 
     @Getter
     private final Integer code;
@@ -24,6 +24,6 @@ public enum UserRole implements Code<Integer>, GrantedAuthority {
     }
 
     public String getAuthority() {
-        return name();
+        return name().toLowerCase();
     }
 }

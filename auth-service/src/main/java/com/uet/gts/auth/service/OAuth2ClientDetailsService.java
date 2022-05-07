@@ -1,16 +1,14 @@
-package com.uet.gts.auth.service.impl;
+package com.uet.gts.auth.service;
 
 import com.uet.gts.auth.repository.OAuth2ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
 import org.springframework.security.oauth2.provider.client.BaseClientDetails;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 @Service
@@ -19,8 +17,10 @@ public class OAuth2ClientDetailsService implements ClientDetailsService {
     @Autowired
     private OAuth2ClientRepository oAuth2ClientRepository;
 
+    @Cacheable(value = "loadClientByClientId" , key = "#clientId", unless = "#result == null")
     @Override
     public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
+        if (clientId == null)  throw new ClientRegistrationException("ClientId is null");
         var clientOpt = oAuth2ClientRepository.findById(clientId);
         if (clientOpt.isEmpty()) {
             throw new ClientRegistrationException("Not found client: " + clientId);

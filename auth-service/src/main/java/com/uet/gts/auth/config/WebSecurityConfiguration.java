@@ -3,8 +3,6 @@ package com.uet.gts.auth.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -30,15 +28,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors()
-            .and()
+        http.cors().disable()
             .csrf().disable()
             .formLogin().disable()
             .httpBasic().disable()
             .logout().disable()
             .authorizeRequests()
-            .antMatchers("/actuator/**").permitAll()
-            .anyRequest().authenticated()
+            .anyRequest().permitAll()
             .and().sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()

@@ -1,9 +1,10 @@
-package com.uet.gts.auth.service.impl;
+package com.uet.gts.auth.service;
 
 import com.uet.gts.auth.model.dto.UserDetailDTO;
 import com.uet.gts.auth.repository.UserRepository;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,6 +21,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @SneakyThrows
     @Override
+    @Cacheable(value = "loadUserByUsername" , key = "#username", unless = "#result == null")
     public UserDetails loadUserByUsername(String username) {
         var userOpt = userRepository.findByUsername(username);
         if (userOpt.isEmpty()) {

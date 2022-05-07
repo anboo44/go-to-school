@@ -1,7 +1,8 @@
 package com.uet.gts.auth.config;
 
 import com.uet.gts.auth.model.dto.UserDetailDTO;
-import com.uet.gts.auth.service.impl.OAuth2ClientDetailsService;
+import com.uet.gts.auth.service.OAuth2ClientDetailsService;
+import com.uet.gts.common.constant.KeyConstant;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -24,6 +25,7 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
+
 import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -86,19 +88,21 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         return (accessToken, authentication) -> {
             Map<String, Object> map = new HashMap<>(1);
             UserDetailDTO userDetailDTO = (UserDetailDTO) authentication.getUserAuthentication().getPrincipal();
-            map.put("userId", userDetailDTO.getUser().getId());
+            map.put(KeyConstant.USER_ID, userDetailDTO.getUser().getId());
             ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(map);
             return accessToken;
         };
     }
 
+    @SneakyThrows
     private JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         converter.setKeyPair(keyPair());
         return converter;
     }
 
-    private KeyPair keyPair() {
+    @Bean
+    public KeyPair keyPair() {
         // Get the key pair from the certificate jwt.jks in the classpath directory
         KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(
                 new ClassPathResource(resource.getKeyStore()), resource.getKeyPairPassword().toCharArray()
@@ -113,9 +117,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         return new DefaultWebResponseExceptionTranslator() {
             @Override
             public ResponseEntity<OAuth2Exception> translate(Exception e) throws Exception {
-                // This is the line that prints the stack trace to the log. You can customise this to format the trace etc if you like
-                e.printStackTrace();
-                // Carry on handling the exception
+                // e.printStackTrace();
                 ResponseEntity<OAuth2Exception> responseEntity = super.translate(e);
                 HttpHeaders headers = new HttpHeaders();
                 headers.setAll(responseEntity.getHeaders().toSingleValueMap());

@@ -7,5 +7,6 @@ spring:
 
 eureka:
   client:
+    allow-redirects: true
     registerWithEureka: false
     fetchRegistry: false
