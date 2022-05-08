@@ -12,6 +12,8 @@ version '1.0.0'
 
 repositories {
     mavenCentral()
+    maven { url 'https://repo.spring.io/release' }
+    gradlePluginPortal()
 }
 
 subprojects {
@@ -33,6 +35,8 @@ subprojects {
     repositories {
         mavenLocal()
         mavenCentral()
+        maven { url 'https://repo.spring.io/release' }
+        gradlePluginPortal()
     }
 
     buildscript {
@@ -69,6 +73,11 @@ jar {
 
 bootJar {
     enabled = false
+}
+
+bootBuildImage {
+    builder = 'paketobuildpacks/builder:tiny'
+    environment = ['BP_NATIVE_IMAGE': 'true']
 }
 
 gradle.buildFinished {

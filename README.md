@@ -124,3 +124,7 @@ Please run all services by below ordered
 - Create external service, impl SSO to follow: https://shekhargulati.com/2018/02/15/single-sign-on-in-spring-boot-applications-with-spring-security-oauth
 - Add system architecture image
 - Add docker files
+- Impl Spring native at `gts-auth-service`
+- Add websocket
+- Add prometheus
+- Add circus breaker

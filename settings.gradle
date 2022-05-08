@@ -1,3 +1,11 @@
+pluginManagement {
+    repositories {
+        maven { url 'https://repo.spring.io/release' }
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
 rootProject.name = 'go-to-school'
 
 include 'auth-service'
@@ -7,4 +15,3 @@ include 'core-service'
 include 'logger-service'
 include 'report-service'
 include 'common-lib'
-
