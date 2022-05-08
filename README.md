@@ -42,8 +42,7 @@ IV. Gradle & GraalVM
 
 ## Microservices
 
-Please run all services by below ordered
-All services can be built into `native-image` by `spring-native`
+Please run all services by below ordered. All services can be built into `native-image` by `spring-native`
 
 #### I. Common-lib
 

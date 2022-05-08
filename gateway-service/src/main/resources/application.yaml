@@ -8,7 +8,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwkSetUri: ${JWK_URI:http://localhost:8000/auth/.well-known/jwks.json}
+          jwkSetUri: http://${JWK_URI:localhost}:8000/auth/.well-known/jwks.json
   application.name: gts-gateway-service
   main:
     web-application-type: reactive
@@ -40,4 +40,4 @@ eureka:
   client:
     register-with-eureka: true
     fetch-registry: true
-    service-url.defaultZone: http://localhost:8761/eureka
+    service-url.defaultZone: http://${DISCOVERY_ADDRESS:localhost}:8761/eureka
