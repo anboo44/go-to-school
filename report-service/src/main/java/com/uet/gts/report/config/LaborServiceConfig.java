@@ -8,8 +8,6 @@ import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Component;
 
-import java.util.concurrent.CompletableFuture;
-
 @Component
 public class LaborServiceConfig {
 
@@ -17,17 +15,8 @@ public class LaborServiceConfig {
     private DiscoveryClient discoveryClient;
 
     private final static String CORE_SERVICE_NAME = "gts-core-service";
-    private final static String GATEWAY_SERVICE_NAME = "gts-gateway-service";
     private final static int FIRST_IDX = 0;
     private final static String PROTOCOL = "http";
-
-    public LaborServiceConfig() {
-        this.timer();
-    }
-
-    public String getGatewayPath() {
-        return getBasePath(GATEWAY_SERVICE_NAME);
-    }
 
     public String getCorePath() {
         return getBasePath(CORE_SERVICE_NAME);
@@ -50,19 +39,5 @@ public class LaborServiceConfig {
     }
 
     @CacheEvict(value = "randomInstance", allEntries = true)
-    public void clearInstanceCache() {
-        // Reset `randomInstance` every 5 minutes
-        timer();
-    }
-
-    private void timer() {
-        CompletableFuture.runAsync(() -> {
-            try {
-                Thread.sleep(5 * 60 * 1000); // 5 minutes
-                clearInstanceCache();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-    }
+    public void clearInstanceCache() {}
 }

@@ -1,0 +1,78 @@
+{
+	"info": {
+		"_postman_id": "79e7aff9-c4c6-477c-b30e-44fc7b690e5c",
+		"name": "GTS-Report",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Student report",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/report/api/v1/report/student",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"report",
+						"api",
+						"v1",
+						"report",
+						"student"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get classroom report",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/report/api/v1/report/classroom",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"report",
+						"api",
+						"v1",
+						"report",
+						"classroom"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get teacher report",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/report/api/v1/report/teacher",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"report",
+						"api",
+						"v1",
+						"report",
+						"teacher"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

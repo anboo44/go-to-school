@@ -1,0 +1,221 @@
+{
+	"info": {
+		"_postman_id": "05e8fd1b-427a-4506-ad1b-f9eeeeaa8d9f",
+		"name": "GTS-Core",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Student API",
+			"item": [
+				{
+					"name": "Get student list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsib2F1dGgyLXJlc291cmNlIl0sInVzZXJfbmFtZSI6ImFuYm9vMzMiLCJzY29wZSI6WyJ3cml0ZSIsInJlYWQiXSwiZXhwIjoxNjUyNTI1NjQzLCJ1c2VySWQiOjEsImF1dGhvcml0aWVzIjpbInVzZXIiXSwianRpIjoiNmU3NTIxNTEtNjJjZC00OTliLWI3ODAtODAxMmFmMWMwZDEyIiwiY2xpZW50X2lkIjoid2ViLWNsaWVudCJ9.Tig6Ym19-suD7jI3K4oOMwIXhGfg599vI3cwL-Z9ZZ_piVM-owMlP4TCSg7N4vmRY6858gl3aCufWe49KxwZSBUHybvsxUmpQzhS2t8gdCRjlw7T5e8kHUNSL6OEsyUzJAeb4DQUvox8AWhrOc-FvfnsPCmfF3JKVftyeBRrMyf-AUZvPA2qmRG--ans0f7NpBNiyu535jSyD5yAJDFls9O77OhWX_MltmDAz_xS74bxIPnmy-_S2C5nbp0rUbNIplMVupUQTla7oPBz4eLUKv2U-LuHRT1NZ1s2Lilyz-Boe37dx24Wpp0bAWyXSvVbcyazW749XwNQrTqShSmBEA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/core/api/v1/students",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"core",
+								"api",
+								"v1",
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get student by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/core/api/v1/students/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"core",
+								"api",
+								"v1",
+								"students",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Teacher API",
+			"item": [
+				{
+					"name": "Get teacher list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/core/api/v1/teachers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"core",
+								"api",
+								"v1",
+								"teachers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Teacher by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsib2F1dGgyLXJlc291cmNlIl0sInVzZXJfbmFtZSI6ImFuYm9vNDQiLCJzY29wZSI6WyJ3cml0ZSIsInJlYWQiXSwiZXhwIjoxNjUyNTQyMzUzLCJ1c2VySWQiOjMsImF1dGhvcml0aWVzIjpbImFkbWluIl0sImp0aSI6IjYwODA3MjY5LWM0NDQtNDAxMS04MzRkLTIyOTE1NDY1ZWQyNyIsImNsaWVudF9pZCI6IndlYi1jbGllbnQifQ.A8ntFb4dJEKqnEs93QsOAAT96ItiCtcZ1YoxspjNb7IH3MjhwPIDyZgckJ34kS_f7CZkOqZIaCFXKpc_8gUG4WWAa2VsmmhnX6wukrf4Zcq-PM_ECgZjWpdVEN7e1Ps_eam-xEIt0iVD1G50JmhEANiESHUIL2hrKAyh1uY2KIsfwdbH-2kwBYp8-HzY3w_UhPpH6bTnT4u1E0v5dzAnlWhclqJSbSAQwnXVRV37HidtbI_F-8h8ZANpnIpRStkXBl9DZ4yvID-BgRMKqGzToUW97zOcIhz1soNqguGfQJQ-a6wquJgvfAhpf-7PIJfVz8_dbb4jv7IP4yeCmPFkew",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/core/api/v1/teachers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"core",
+								"api",
+								"v1",
+								"teachers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Classroom API",
+			"item": [
+				{
+					"name": "Get classrom by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/core/api/v1/classrooms/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"core",
+								"api",
+								"v1",
+								"classrooms",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get classroom List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsib2F1dGgyLXJlc291cmNlIl0sInVzZXJfbmFtZSI6ImFuYm9vNDQiLCJzY29wZSI6WyJ3cml0ZSIsInJlYWQiXSwiZXhwIjoxNjUyNTQyMzUzLCJ1c2VySWQiOjMsImF1dGhvcml0aWVzIjpbImFkbWluIl0sImp0aSI6IjYwODA3MjY5LWM0NDQtNDAxMS04MzRkLTIyOTE1NDY1ZWQyNyIsImNsaWVudF9pZCI6IndlYi1jbGllbnQifQ.A8ntFb4dJEKqnEs93QsOAAT96ItiCtcZ1YoxspjNb7IH3MjhwPIDyZgckJ34kS_f7CZkOqZIaCFXKpc_8gUG4WWAa2VsmmhnX6wukrf4Zcq-PM_ECgZjWpdVEN7e1Ps_eam-xEIt0iVD1G50JmhEANiESHUIL2hrKAyh1uY2KIsfwdbH-2kwBYp8-HzY3w_UhPpH6bTnT4u1E0v5dzAnlWhclqJSbSAQwnXVRV37HidtbI_F-8h8ZANpnIpRStkXBl9DZ4yvID-BgRMKqGzToUW97zOcIhz1soNqguGfQJQ-a6wquJgvfAhpf-7PIJfVz8_dbb4jv7IP4yeCmPFkew",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/core/api/v1/classrooms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"core",
+								"api",
+								"v1",
+								"classrooms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add member",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"teacherId\": 1,\r\n    \"studentIds\": [\r\n        1, 2, 3, 4, 5, 6\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/core/api/v1/classrooms/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"core",
+								"api",
+								"v1",
+								"classrooms",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

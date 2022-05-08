@@ -1,0 +1,303 @@
+{
+	"info": {
+		"_postman_id": "6100c065-7fbd-44c9-9260-d495b630401a",
+		"name": "GTS-Auth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Hello Auth Service",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsib2F1dGgyLXJlc291cmNlIl0sInVzZXJfbmFtZSI6ImFuYm9vMzMiLCJzY29wZSI6WyJ3cml0ZSIsInJlYWQiXSwiZXhwIjoxNjUyNTM5MDgzLCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbInVzZXIiXSwianRpIjoiOTEyZmY1NTAtMDE0Ni00Mzg4LWJjZjctMTg1MzZjM2Y4ZGEyIiwiY2xpZW50X2lkIjoid2ViLWNsaWVudCJ9.WcQmLulNpaK7jqZVEOdLUYHX1uVMpg23XtfKb_zH0BRXYZ2A_1oXJKtqPpOqmmWMLKer7XxwWpUN1_yBsNuI8a3R5WT2puy5XPBP7c_HiK8kwGpBQJPux04kLFE2ENmnbLk5SlSS3xG55Mug_lQiXf81v-DscbIGaidkudkIK0N0W0FNnbDbnD00xBKn8VVoe7qVU50Akb1THRhfknqdIN8-p9kUwkIqj2OG8SLQlZJqO6kQkusAWHTYK0ruMqYebR0FZYldpj3C_qCQo1dgXtRjjr1zbTrSLzgaWyYbfNqrE3xMRWOKKt3NOtMRw4PQkMDeMe9AoHaZD7epJimbrw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/auth/api/v1/hello",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"api",
+						"v1",
+						"hello"
+					],
+					"query": [
+						{
+							"key": "Authorization",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh token",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic d2ViLWNsaWVudDpBYUAxMjM0NTY=",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "web-client",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "client_secret",
+							"value": "Aa@123456",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "grant_type",
+							"value": "refresh_token",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "anboo33",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Aa@123456",
+							"type": "text"
+						},
+						{
+							"key": "refresh_token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhbmJvbzMzIiwic2NvcGUiOlsid3JpdGUiLCJyZWFkIl0sImF0aSI6IjhlN2FkNjEyLWY4N2YtNGQyYS1hMmYyLThjOGVlODQ2OTRjMyIsImV4cCI6MTY1MjM2MDI5NywiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImp0aSI6IjJlZTYwN2I0LTZjMjYtNDhmZi04ZjliLTRmMDIxMjk5ZWNlNyIsImNsaWVudF9pZCI6IndlYi1jbGllbnQifQ.gNcWDblqP7ghJ36O30D0ljbSyLVVu-FzbE8Nm4pjHF7hHVJxYD5oR8wI9npSSeZmTF1zK7e3Q6sG7QY9jJXWbhZvLciwef6OPhantUN9ytT19jTbYiLBbhPkUo29yVG_gNBpkf-_BXwzbOgg5MgYdPVa8HSfTZI3PeyB4fNjdfl6xqj4zfGSyu_bw2Snv95Lj6N3wcAvcWhmBNMrseLNB3ij8JICHybeQdyRRu5Ut4FTPSC_DXGwo7R05o90jw2_x06S7v295nCLqeJ8oBVQakQxxF5_TtE2IaE6O2FVf04wTQTBcL97GwXSydLBWa75YpkIhesZNTEbsw41uSJAgg",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8111/oauth/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8111",
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic d2ViLWNsaWVudDpBYUAxMjM0NTY=",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "web-client",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "client_secret",
+							"value": "Aa@123456",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "anboo44",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Aa@123456",
+							"type": "text"
+						},
+						{
+							"key": "refresh_token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhbmJvbzMzIiwic2NvcGUiOlsid3JpdGUiLCJyZWFkIl0sImF0aSI6IjhlN2FkNjEyLWY4N2YtNGQyYS1hMmYyLThjOGVlODQ2OTRjMyIsImV4cCI6MTY1MjM2MDI5NywiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImp0aSI6IjJlZTYwN2I0LTZjMjYtNDhmZi04ZjliLTRmMDIxMjk5ZWNlNyIsImNsaWVudF9pZCI6IndlYi1jbGllbnQifQ.gNcWDblqP7ghJ36O30D0ljbSyLVVu-FzbE8Nm4pjHF7hHVJxYD5oR8wI9npSSeZmTF1zK7e3Q6sG7QY9jJXWbhZvLciwef6OPhantUN9ytT19jTbYiLBbhPkUo29yVG_gNBpkf-_BXwzbOgg5MgYdPVa8HSfTZI3PeyB4fNjdfl6xqj4zfGSyu_bw2Snv95Lj6N3wcAvcWhmBNMrseLNB3ij8JICHybeQdyRRu5Ut4FTPSC_DXGwo7R05o90jw2_x06S7v295nCLqeJ8oBVQakQxxF5_TtE2IaE6O2FVf04wTQTBcL97GwXSydLBWa75YpkIhesZNTEbsw41uSJAgg",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/auth/oauth/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check token",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic d2ViLWNsaWVudDpBYUAxMjM0NTY=",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "web-client",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "client_secret",
+							"value": "Aa@123456",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "anboo33",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Aa@123456",
+							"type": "text"
+						},
+						{
+							"key": "refresh_token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhbmJvbzMzIiwic2NvcGUiOlsid3JpdGUiLCJyZWFkIl0sImF0aSI6IjhlN2FkNjEyLWY4N2YtNGQyYS1hMmYyLThjOGVlODQ2OTRjMyIsImV4cCI6MTY1MjM2MDI5NywiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImp0aSI6IjJlZTYwN2I0LTZjMjYtNDhmZi04ZjliLTRmMDIxMjk5ZWNlNyIsImNsaWVudF9pZCI6IndlYi1jbGllbnQifQ.gNcWDblqP7ghJ36O30D0ljbSyLVVu-FzbE8Nm4pjHF7hHVJxYD5oR8wI9npSSeZmTF1zK7e3Q6sG7QY9jJXWbhZvLciwef6OPhantUN9ytT19jTbYiLBbhPkUo29yVG_gNBpkf-_BXwzbOgg5MgYdPVa8HSfTZI3PeyB4fNjdfl6xqj4zfGSyu_bw2Snv95Lj6N3wcAvcWhmBNMrseLNB3ij8JICHybeQdyRRu5Ut4FTPSC_DXGwo7R05o90jw2_x06S7v295nCLqeJ8oBVQakQxxF5_TtE2IaE6O2FVf04wTQTBcL97GwXSydLBWa75YpkIhesZNTEbsw41uSJAgg",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/oauth/check_token?token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsib2F1dGgyLXJlc291cmNlIl0sInVzZXJfbmFtZSI6ImFuYm9vMzMiLCJzY29wZSI6WyJ3cml0ZSIsInJlYWQiXSwiZXhwIjoxNjUxODQ3NzAyLCJ1c2VySWQiOjEsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJqdGkiOiJiMjQ2MDZhYi1kNjJhLTQxMWMtODc3OS05NWM0ZTQxYTc2ZjgiLCJjbGllbnRfaWQiOiJ3ZWItY2xpZW50In0.gt6-bjDS5Sq9_F98r7mkJIWmUO-VN7rSqFT3BV0eDOGBalABOcMHC0DROZo7wPrth383Z6bvtJqE9Zo1FjN9U9pUl5LZNsNnDTqy3ns7yy_qfWL2woh_-zAFY9aASWQn4pGhOl91hlAGkXT-I3Uhi-zASLujMvVQIm6PnGPpc4HQl-zAkOXYM9TJNAqqGbrmfdsiIPw123KyKkDB6SeXQm8UIOBKHTFJvURSwH4fr_luw73HoNE8vtacvLHkhZvHvNxmLevve09ncTdzSlT7E_VbRasCcM-vKkHIhGydPga9WwxnNHgeDt6eUXZNOa4paP4sWDEHf-NRPTmjPDNJmg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oauth",
+						"check_token"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsib2F1dGgyLXJlc291cmNlIl0sInVzZXJfbmFtZSI6ImFuYm9vMzMiLCJzY29wZSI6WyJ3cml0ZSIsInJlYWQiXSwiZXhwIjoxNjUxODQ3NzAyLCJ1c2VySWQiOjEsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJqdGkiOiJiMjQ2MDZhYi1kNjJhLTQxMWMtODc3OS05NWM0ZTQxYTc2ZjgiLCJjbGllbnRfaWQiOiJ3ZWItY2xpZW50In0.gt6-bjDS5Sq9_F98r7mkJIWmUO-VN7rSqFT3BV0eDOGBalABOcMHC0DROZo7wPrth383Z6bvtJqE9Zo1FjN9U9pUl5LZNsNnDTqy3ns7yy_qfWL2woh_-zAFY9aASWQn4pGhOl91hlAGkXT-I3Uhi-zASLujMvVQIm6PnGPpc4HQl-zAkOXYM9TJNAqqGbrmfdsiIPw123KyKkDB6SeXQm8UIOBKHTFJvURSwH4fr_luw73HoNE8vtacvLHkhZvHvNxmLevve09ncTdzSlT7E_VbRasCcM-vKkHIhGydPga9WwxnNHgeDt6eUXZNOa4paP4sWDEHf-NRPTmjPDNJmg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get public key as Base64",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsib2F1dGgyLXJlc291cmNlIl0sInVzZXJfbmFtZSI6ImFuYm9vMzMiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNjUyNTM2MTI5LCJ1c2VySWQiOjIsImF1dGhvcml0aWVzIjpbInVzZXIiXSwianRpIjoiYmYxMTU0ZjQtMzI1NS00ODY3LWI0NWUtNmYzYjlkYWJhZDZiIiwiY2xpZW50X2lkIjoid2ViLWNsaWVudCJ9.adqTTGU3UskVzy-_GBp41OXpt_bAv9o3O76DpVym5Wj6jDfrFTsiAAdCnmUSOjK63Gg_JINKc5vS9EVNljJZyNsL92QTMcN_v4ssoUByvWWuEOEgFU3LMPyiaCKsdRwXbFCnVJWqyAamtacC-Xh2GytKE1BH-qRFfSE2OqNAYQX3b5OCGKpklWNezj-IBhfnxQfbF07YgmXgXSzoPuf_HueT9YkErBJHvl-ApwGe5719A2rFkYMGx9Dbmnlbp-Nqkv9OrLEHEesLYvtLRHdi9S4o5ojFYOIwX7cILSBel7iaoEMNt_brzHJCTcSRyT7Yb5QHTiD89BRSP3G_oLrucg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/auth/.well-known/jwks.json",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						".well-known",
+						"jwks.json"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -28,9 +28,12 @@ II. Install postgres database
 - Download & install: https://www.postgresql.org/download/
 - Setting username & password. Default username: postgres
 - Postgres starts at port: 5432
-- Create database for gts-core-service: gts_core
+- Create database for gts-core-service: gts_core, gts_auth
 
-## Micro-Services
+III. JDK
+- Require JDK 11+ 
+
+## Microservices
 
 Please run all services by below ordered
 
@@ -62,6 +65,7 @@ Please run all services by below ordered
 - Module name: `gts-auth-service`
 - Info: Apply OAuth2 with Jwt for authentication
 - Service starts at fixed port: `8000`
+- Change DB config at [application.properties](/auth-service/src/main/resources/application.properties)
 - Add postman guideline for auth-service to view at here: https://h.readthedocs.io/en/latest/api/authorization/#client-credentials
 - Springboot support 3 ways for tokenStore
   + InMemoryTokenStore: AccessToken is stored in `ConcurrentHashMap`(memory). No use for distributed system because sync.
@@ -79,6 +83,7 @@ Please run all services by below ordered
 - Module name: `gts-core-service`
 - Info: Process main business logic for `teacher`, `student`, `classroom`
 - Support REST API & gRPC
+- Change DB config at [application.properties](/core-service/src/main/resources/application.properties)
 - Tomcat server & gRPC server starts at dynamic port, the port will be determined at runtime
 - View Open API specification at: `http://localhost:<port>/core/swagger-ui/index.html`
 - Running:
@@ -92,6 +97,12 @@ Please run all services by below ordered
 - Info: Connect to `gts-core-service` to provide report through rest apis
 - Report-service connect Core-service by using RestAPI & gRPC
 - When client call apis to get report, there are message as action log sent to kafka
+- Apply `SpringBatch` to clear `ServiceInstanceCache`: run every 5 minutes.
+  - SpringBatch flow: 
+    - Create `Tasklet` -> add it to `Step` -> Add to `Job`. Using `JobLaucher` to run job.
+    - Push `JobLaucher` & `Job`to `JobDetail` -> Add to `Trigger` with one scheduler -> Running.
+    - Can use `Reader`, `Processor`, `Writer` flow for JDBC working.
+    - View detail at: https://docs.spring.io/spring-batch/docs/current/reference/html/readersAndWriters.html
 - Running:
   + Need start Core-service & Kafka (view setup step) at first 
   + Run `ReportApplication.java` to start service

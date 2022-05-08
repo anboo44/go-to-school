@@ -1,15 +1,12 @@
 package com.uet.gts.gateway.config.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nimbusds.jose.shaded.json.JSONUtil;
 import com.uet.gts.common.constant.ErrorList;
 import com.uet.gts.common.dto.ErrorDTO;
 import com.uet.gts.common.dto.ResponseDTO;
 import lombok.SneakyThrows;
 import org.springframework.core.io.buffer.DataBuffer;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.server.authorization.ServerAccessDeniedHandler;
