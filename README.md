@@ -31,11 +31,19 @@ II. Install postgres database
 - Create database for gts-core-service: gts_core, gts_auth
 
 III. JDK
-- Require JDK 11+ 
+- Require JDK 11+
+
+IV. Gradle & GraalVM
+
+- If use IntelIJ IDEA, skip this step. IntelIJ supports to build `spring-native package` for GraalVM
+- Install Gradle follow guideline at here: https://www.tutorialspoint.com/gradle/gradle_installation.htm
+- Install GraalVM follow guidelines at here: https://www.graalvm.org/java/quickstart/
+ 
 
 ## Microservices
 
 Please run all services by below ordered
+All services can be built into `native-image` by `spring-native`
 
 #### I. Common-lib
 
