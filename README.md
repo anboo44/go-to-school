@@ -33,12 +33,15 @@ II. Install postgres database
 III. JDK
 - Require JDK 11+
 
-IV. Gradle & GraalVM
+IV. Gradle
 
 - If use IntelIJ IDEA, skip this step. IntelIJ supports to build `spring-native package` for GraalVM
 - Install Gradle follow guideline at here: https://www.tutorialspoint.com/gradle/gradle_installation.htm
-- Install GraalVM follow guidelines at here: https://www.graalvm.org/java/quickstart/
- 
+
+V. Docker
+
+- if on local, recommend to use `Docker Desktop`
+- Install docker by using `google-search`
 
 ## Microservices
 
@@ -124,6 +127,27 @@ Please run all services by below ordered. All services can be built into `native
   + Start Kafka & Core-service & Report-service at first
   + Run `LoggerApplication.java` to start service
   + Make an API caller to `Report-service`. And then, view `logger-service`'s console to see event message.
+
+## Build & Run all services
+
+- Running by docker (easily way):
+  + Turn on docker app
+  + Go to project_path, run command: `./docker-native.sh`
+  + Source code will be packed into `native-image`
+- Running by jar file:
+  + Run command: `./gradlew :<service_name>:build`
+    
+    ex: ./gradlew :auth-service:build
+  + Go to build_folder inside service and run command: `java -jar <service_name>.jar`
+    
+    ex: java -jar gts-auth-service.jar
+  + Remember DB setting before start service by above guideline.
+
+- Test:
+  + Using postman, view all services: http://localhost:8761 (may be take time, please refresh page)
+  + You need login at first, authentication info at [here](/auth-service/src/main/java/com/uet/gts/auth/initData/DataFactory.java)
+  + You can use postman collection for import to Postman app, at [here](/document/postman)
+  + Enjoy result ^^
 
 ## TODO
 - Add caching for `GET API` or `Get data from DB` by using Redis

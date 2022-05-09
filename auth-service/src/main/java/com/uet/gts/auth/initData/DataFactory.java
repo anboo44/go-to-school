@@ -68,7 +68,7 @@ public class DataFactory {
         user1.setUserAuthority(normalAuthority);
         user2.setUserAuthority(managerAuthority);
 
-        return List.of(user1);
+        return List.of(user1, user2);
     }
 
     private List<OAuth2Client> getOAuth2ClientDummy() {

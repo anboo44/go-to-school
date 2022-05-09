@@ -55,6 +55,7 @@ subprojects {
     dependencies {
         implementation("org.springframework.boot:spring-boot-starter-parent:${springBootVersion}")
         implementation("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
+        implementation 'com.google.code.findbugs:jsr305:3.0.2' //remove gradle's warning
 
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
