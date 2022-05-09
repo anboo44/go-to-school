@@ -170,3 +170,4 @@ Please run all services by below ordered. All services can be built into `native
 - Add websocket
 - Add prometheus
 - Add circus breaker
+- Add spring-config-server
