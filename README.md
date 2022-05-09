@@ -13,6 +13,8 @@
 7. UI Service: display data. Using ReactJs.
 ```
 
+![Screenshot](/document/system-architecture.png)
+
 ## Setup
 
 I. Install Kafka for event streaming
@@ -145,7 +147,7 @@ Please run all services by below ordered. All services can be built into `native
 
 - Test:
   + Using postman, view all services: http://localhost:8761 (may be take time, please refresh page)
-  + You need login at first, authentication info at [here](/auth-service/src/main/java/com/uet/gts/auth/initData/DataFactory.java)
+  + You need login at first, authentication info: use grant_type: password and username,password,client_id,client_secret at [here](/auth-service/src/main/java/com/uet/gts/auth/initData/DataFactory.java)
   + You can use postman collection for import to Postman app, at [here](/document/postman)
   + Enjoy result ^^
 
@@ -154,8 +156,6 @@ Please run all services by below ordered. All services can be built into `native
 - Add cloud-load-balancer dependence for call api from report service to core service
 - Create external service, impl SSO to follow: https://shekhargulati.com/2018/02/15/single-sign-on-in-spring-boot-applications-with-spring-security-oauth
 - Add system architecture image
-- Add docker files
-- Impl Spring native at `gts-auth-service`
 - Add websocket
 - Add prometheus
 - Add circus breaker
