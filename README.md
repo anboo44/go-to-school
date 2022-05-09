@@ -13,7 +13,7 @@
 7. UI Service: display data. Using ReactJs.
 ```
 
-<img src="/document/system-architecture.png" alt="drawing" width="200" style="display: block; margin: auto"/>
+<img src="/document/system-architecture.png" alt="drawing" width="550" style="display: block; margin: auto"/>
 
 ```text
 Explain:
