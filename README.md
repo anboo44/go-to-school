@@ -13,7 +13,17 @@
 7. UI Service: display data. Using ReactJs.
 ```
 
-<img src="/document/system-architecture.png" alt="drawing" width="200"/>
+<img src="/document/system-architecture.png" alt="drawing" width="200" style="display: block; margin: auto"/>
+
+```text
+Explain:
+1. Request to system, it is through gateway-service
+2 & 3. Gateway-service fetches public_key from auth-service via rest api for authenticate & authorize. If success, request goes to destination, else reject with code 401 or 403.
+4. Request goes to service destination for business via Rest API
+5. If request comes report-service, report-service will contact core-service via Rest & gRPC.
+6. After report-service processes request successfully, it pushes one message to kafka-server
+7. Logger-service receives message from kafka-server
+```
 
 ## Setup
 
