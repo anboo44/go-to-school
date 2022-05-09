@@ -13,7 +13,7 @@
 7. UI Service: display data. Using ReactJs.
 ```
 
-![Screenshot](/document/system-architecture.png)
+<img src="/document/system-architecture.png" alt="drawing" width="200"/>
 
 ## Setup
 
