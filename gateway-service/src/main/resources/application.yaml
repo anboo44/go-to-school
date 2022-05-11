@@ -31,6 +31,18 @@ spring:
           uri: lb://gts-auth-service
           predicates:
             - Path=/auth/**
+# Detail: https://programmer.group/spring-cloud-gateway-s-built-in-filter-factory.html
+#        - id: reset-password-link
+#            uri: http://${DOCKER_HOST:localhost}:8080
+#            predicates:
+#              - Method=GET
+#              - Path=/password/reset**
+#              - Query=token
+#            filters:
+#              - name: TokenFilter ----> TokenFilter extends AbstractGatewayFilterFactory<TokenFilter.Config> & config: mobileUrl & webUrl
+#                args:
+#                  mobileUrl: gotoschool://password/reset?token=
+#                  webUrl: http://${DOCKER_HOST:localhost}:3001/password/reset?token=
 
 eureka:
   instance:
